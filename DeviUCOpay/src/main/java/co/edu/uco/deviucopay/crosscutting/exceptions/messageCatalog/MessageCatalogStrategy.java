@@ -27,9 +27,19 @@ public class MessageCatalogStrategy {
 	public static final Mensaje getMensaje(final CodigoMensaje codigo,
 			final String...parametros){
 		if (ObjectHelper.getObjectHelper().isNull(codigo)) {
-			throw new CrossCuttingDeviUcopayException(null, null);
-		}
+			var mensajeUsuario= MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00002);
+			var mensajeTecnico= MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00001);
+			throw new CrossCuttingDeviUcopayException(mensajeTecnico, mensajeUsuario);
+			}
 		return getStrategy(codigo.isBase())
 				.obtenerMensaje(codigo, parametros);
+	}
+	public static final String getContenidoMensaje(final CodigoMensaje codigo,
+			final String...parametros) {
+		return getMensaje(codigo, parametros).getContenido();		
+	}
+	public static void main(String[] args) {
+		System.out.println(getContenidoMensaje(CodigoMensaje.M00007));
+		
 	}
 }
