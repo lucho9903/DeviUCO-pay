@@ -33,7 +33,7 @@ public class Mensaje {
 		return getCodigo().getTipo();
 	}
 
-	public final String getContendio() {
+	public final String getContenido() {
 		return contenido;
 	}
 	
