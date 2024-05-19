@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.UUID"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.helpers.TextHelper"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.exceptions.DeviUcopayException"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.exceptions.enums.Lugar"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.exceptions.messageCatalog.MessageCatalog"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.exceptions.messageCatalog.impl.MessageCatalogBase"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.exceptions.customs.CrossCuttingDeviUcopayException"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.exceptions.messageCatalog.data.CodigoMensaje"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.exceptions.messageCatalog.data.Mensaje"/>
+    <fullyQualifiedTypeName name="co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper"/>
+    <fullyQualifiedTypeName name="javax.swing.text.StyledEditorKit.UnderlineAction"/>
+</qualifiedTypeNameHistroy>
