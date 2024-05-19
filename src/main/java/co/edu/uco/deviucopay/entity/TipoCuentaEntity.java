@@ -1,35 +1,35 @@
-package co.edu.uco.deviucopay.dto;
+package co.edu.uco.deviucopay.entity;
 
 import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 
 
-public final class TipoCuentaDTO {
+public final class TipoCuentaEntity {
 	
 	private UUID id;
 	private String nombre;
 	private String identificadorTipoCuenta;
 	
 	
-	public TipoCuentaDTO(final UUID id, final String nombre, final String identificadorTipoCuenta) {
+	public TipoCuentaEntity(final UUID id, final String nombre, final String identificadorTipoCuenta) {
 		setId(id);
 		setNombre(nombre);
 		setIdentificadorTipoCuenta(identificadorTipoCuenta);
 	}
 	
-	public TipoCuentaDTO () {
+	public TipoCuentaEntity () {
 		super();
 	}
 	
-	public static final TipoCuentaDTO build() {
-		return new TipoCuentaDTO();
+	public static final TipoCuentaEntity build() {
+		return new TipoCuentaEntity();
 	}
 	
 	public final UUID getId() {
 		return id;
 	}
-	public final TipoCuentaDTO setId( final UUID id) {
+	public final TipoCuentaEntity setId( final UUID id) {
 		this.id = id;
 		return this;
 	}
@@ -37,7 +37,7 @@ public final class TipoCuentaDTO {
 		return nombre;
 	}
 	
-	public final TipoCuentaDTO setNombre(final String nombre) {
+	public final TipoCuentaEntity setNombre(final String nombre) {
 		this.nombre=TextHelper.applyTrim(nombre);
 		return this;
 	}
@@ -52,9 +52,6 @@ public final class TipoCuentaDTO {
 		this.identificadorTipoCuenta = TextHelper.applyTrim(identificadorTipoCuenta);
 	}
 
-	public static void main(String[] args) {
-		TipoCuentaDTO tipoCuenta = TipoCuentaDTO.build();
-	}
 	
 	
 }

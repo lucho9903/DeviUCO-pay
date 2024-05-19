@@ -1,4 +1,4 @@
-package co.edu.uco.deviucopay.dto;
+package co.edu.uco.deviucopay.entity;
 
 import java.util.UUID;
 
@@ -7,20 +7,20 @@ import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
 
-public class AfiliadoDTO {
+public class AfiliadoEntity {
 	
 	private UUID id;
 	private Long numeroIdAfiliado;
 	private String nombre;
 	private String correo;
 	private Long telefono;
-	private TipoIdentificacionDTO tipoIdentificacion;
-	private InstitucionDTO institucion;
-	private CarnetDTO carnet;
+	private TipoIdentificacionEntity tipoIdentificacion;
+	private InstitucionEntity institucion;
+	private CarnetEntity carnet;
 	
 	
-	public AfiliadoDTO(UUID id, Long numeroIdAfiliado, String nombre, String correo, Long telefono,
-			TipoIdentificacionDTO tipoIdentificacion, InstitucionDTO institucion, CarnetDTO carnet) {
+	public AfiliadoEntity(UUID id, Long numeroIdAfiliado, String nombre, String correo, Long telefono,
+			TipoIdentificacionEntity tipoIdentificacion, InstitucionEntity institucion, CarnetEntity carnet) {
 		super();
 		this.id = id;
 		this.numeroIdAfiliado = numeroIdAfiliado;
@@ -33,12 +33,12 @@ public class AfiliadoDTO {
 	}
 
 	
-	public AfiliadoDTO() {
+	public AfiliadoEntity() {
 		super();
 	}
 	
-	public static final AfiliadoDTO build() {
-		return new AfiliadoDTO();
+	public static final AfiliadoEntity build() {
+		return new AfiliadoEntity();
 	}
 
 	public UUID getId() {
@@ -91,33 +91,33 @@ public class AfiliadoDTO {
 	}
 
 
-	public TipoIdentificacionDTO getTipoIdentificacion() {
+	public TipoIdentificacionEntity getTipoIdentificacion() {
 		return tipoIdentificacion;
 	}
 
 
-	public void setTipoIdentificacion(TipoIdentificacionDTO tipoIdentificacion) {
+	public void setTipoIdentificacion(TipoIdentificacionEntity tipoIdentificacion) {
 		this.tipoIdentificacion = ObjectHelper.getObjectHelper().getDefaultValue(tipoIdentificacion,new TipoIdentificacionDTO());
 	}
 
 
-	public InstitucionDTO getInstitucion() {
+	public InstitucionEntity getInstitucion() {
 		return institucion;
 	}
 
 
-	public void setInstitucion(InstitucionDTO institucion) {
-		this.institucion =  ObjectHelper.getObjectHelper().getDefaultValue(institucion,new InstitucionDTO());
+	public void setInstitucion(InstitucionEntity institucion) {
+		this.institucion =  ObjectHelper.getObjectHelper().getDefaultValue(institucion,new InstitucionEntity());
 	}
 
 
-	public CarnetDTO getCarnet() {
+	public CarnetEntity getCarnet() {
 		return carnet;
 	}
 
 
-	public void setCarnet(CarnetDTO carnet) {
-		this.carnet =  ObjectHelper.getObjectHelper().getDefaultValue(carnet, new CarnetDTO());
+	public void setCarnet(CarnetEntity carnet) {
+		this.carnet =  ObjectHelper.getObjectHelper().getDefaultValue(carnet, new CarnetEntity());
 	}
 	
 	

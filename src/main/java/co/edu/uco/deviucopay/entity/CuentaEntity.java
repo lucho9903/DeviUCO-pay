@@ -1,17 +1,17 @@
-package co.edu.uco.deviucopay.dto;
+package co.edu.uco.deviucopay.entity;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.LongHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 
-public class CuentaDTO {
+public class CuentaEntity {
 	
 	private Long numeroCuenta;
 	private Integer contraseña;
 	private Float saldo;
-	private AfiliadoDTO afiliado;
-	private TipoCuentaDTO tipoCuenta;
+	private AfiliadoEntity afiliado;
+	private TipoCuentaEntity tipoCuenta;
 	
-	public CuentaDTO(Long numeroCuenta, Integer contraseña, Float saldo, AfiliadoDTO afiliado,TipoCuentaDTO tipoCuenta) {
+	public CuentaEntity(Long numeroCuenta, Integer contraseña, Float saldo, AfiliadoEntity afiliado,TipoCuentaEntity tipoCuenta) {
 		
 		setNumeroCuenta(numeroCuenta);;
 		setContraseña(contraseña);
@@ -44,20 +44,20 @@ public class CuentaDTO {
 		this.saldo = saldo;
 	}
 
-	public AfiliadoDTO getAfiliado() {
+	public AfiliadoEntity getAfiliado() {
 		return afiliado;
 	}
 
-	public void setAfiliado(AfiliadoDTO afiliado) {
-		this.afiliado = ObjectHelper.getObjectHelper().getDefaultValue(afiliado,new AfiliadoDTO());
+	public void setAfiliado(AfiliadoEntity afiliado) {
+		this.afiliado = ObjectHelper.getObjectHelper().getDefaultValue(afiliado,new AfiliadoEntity());
 	}
 
-	public TipoCuentaDTO getTipoCuenta() {
+	public TipoCuentaEntity getTipoCuenta() {
 		return tipoCuenta;
 	}
 
-	public void setTipoCuenta(TipoCuentaDTO tipoCuenta) {
-		this.tipoCuenta = ObjectHelper.getObjectHelper().getDefaultValue(tipoCuenta, new TipoCuentaDTO());
+	public void setTipoCuenta(TipoCuentaEntity tipoCuenta) {
+		this.tipoCuenta = ObjectHelper.getObjectHelper().getDefaultValue(tipoCuenta, new TipoCuentaEntity());
 	}
 	
 	

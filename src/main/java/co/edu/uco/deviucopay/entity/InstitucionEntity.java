@@ -1,53 +1,53 @@
-package co.edu.uco.deviucopay.dto;
+package co.edu.uco.deviucopay.entity;
 import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 
 
-public class InstitucionDTO {
+public class InstitucionEntity {
 	
 	private UUID id;
 	private String nombre;
-	private TipoInstitucionDTO tipoInstitucion;	
+	private TipoInstitucionEntity tipoInstitucion;	
 	private String correo;
 	
 	
 	
-	public InstitucionDTO(final UUID id, final  String nombre, final TipoInstitucionDTO tipoInstitucion, final String correo) {		
+	public InstitucionEntity(final UUID id, final  String nombre, final TipoInstitucionEntity tipoInstitucion, final String correo) {		
 		setId(id);
 		setNombre(nombre);
 		setTipoInstitucion(tipoInstitucion);
 		setCorreo(correo);
 	}
 
-	public InstitucionDTO () {
+	public InstitucionEntity () {
 		super();
 	}
 	
-	public TipoInstitucionDTO getTipoInstitucion() {
+	public TipoInstitucionEntity getTipoInstitucion() {
 		return tipoInstitucion;
 	}
 
-	public void setTipoInstitucion(TipoInstitucionDTO tipoInstitucion) {
+	public void setTipoInstitucion(TipoInstitucionEntity tipoInstitucion) {
 		this.tipoInstitucion = ObjectHelper.getObjectHelper().getDefaultValue(tipoInstitucion, new TipoInstitucionDTO());
 	}
 
-	public static final InstitucionDTO build() {
-		return new InstitucionDTO();
+	public static final InstitucionEntity build() {
+		return new InstitucionEntity();
 	}
 	
 	public final UUID getId() {
 		return id;
 	}
-	public final InstitucionDTO setId( final UUID id) {
+	public final InstitucionEntity setId( final UUID id) {
 		this.id = id;
 		return this;
 	}
 	public final String getNombre() {
 		return nombre;
 	}
-	public final InstitucionDTO setNombre(final String nombre) {
+	public final InstitucionEntity setNombre(final String nombre) {
 		this.nombre=TextHelper.applyTrim(nombre);
 		return this;
 	}
