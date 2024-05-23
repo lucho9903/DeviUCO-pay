@@ -47,7 +47,7 @@ public class AfiliadoDTO {
 
 
 	public void setId(UUID id) {
-		this.id = UUIDHelper.obtenerValorDefecto(id);
+		this.id = UUIDHelper.getDefault(id);
 	}
 
 
