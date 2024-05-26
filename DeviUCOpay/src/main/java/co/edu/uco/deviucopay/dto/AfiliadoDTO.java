@@ -21,15 +21,15 @@ public class AfiliadoDTO {
 	
 	public AfiliadoDTO(UUID id, Long numeroIdAfiliado, String nombre, String correo, Long telefono,
 			TipoIdentificacionDTO tipoIdentificacion, InstitucionDTO institucion, CarnetDTO carnet) {
-		super();
-		this.id = id;
-		this.numeroIdAfiliado = numeroIdAfiliado;
-		this.nombre = nombre;
-		this.correo = correo;
-		this.telefono = telefono;
-		this.tipoIdentificacion = tipoIdentificacion;
-		this.institucion = institucion;
-		this.carnet = carnet;
+		super ();
+		setId (id);
+		setNumeroIdAfiliado (numeroIdAfiliado);
+		setNombre(nombre);
+		setCorreo(correo);
+		setTelefono(telefono);
+		setTipoIdentificacion (tipoIdentificacion);
+		setInstitucion(institucion);
+		setCarnet (carnet);
 	}
 
 	
@@ -47,7 +47,7 @@ public class AfiliadoDTO {
 
 
 	public void setId(UUID id) {
-		this.id = UUIDHelper.obtenerValorDefecto(id);
+		this.id = UUIDHelper.getDefault();
 	}
 
 

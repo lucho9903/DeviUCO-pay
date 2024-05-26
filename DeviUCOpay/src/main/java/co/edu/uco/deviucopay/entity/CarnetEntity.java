@@ -33,7 +33,7 @@ public class CarnetEntity {
 	}
 	
 	public void setId(UUID id) {
-		this.id = UUIDHelper.obtenerValorDefecto(id);
+		this.id = UUIDHelper.getDefault(id, null);
 	}
 	
 	public Long getNumeroCarnet() {

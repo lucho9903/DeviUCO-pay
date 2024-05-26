@@ -12,12 +12,17 @@ public class CuentaDTO {
 	private TipoCuentaDTO tipoCuenta;
 	
 	public CuentaDTO(Long numeroCuenta, Integer contraseña, Float saldo, AfiliadoDTO afiliado,TipoCuentaDTO tipoCuenta) {
-		
+		super();
 		setNumeroCuenta(numeroCuenta);;
 		setContraseña(contraseña);
 		setSaldo(saldo);
 		setAfiliado(afiliado);
 		setTipoCuenta(tipoCuenta);
+	}
+	
+	public static final CuentaDTO build() {
+		return new CuentaDTO;
+		
 	}
 
 	public Long getNumeroCuenta() {
