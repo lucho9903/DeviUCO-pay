@@ -11,9 +11,6 @@ public class CarnetDTO {
 	private Long numeroCarnet;
 	
 	
-	
-	
-	
 	public CarnetDTO(UUID id, Long numeroCarnet) {
 		setId(id);
 		setNumeroCarnet(numeroCarnet);
@@ -33,7 +30,7 @@ public class CarnetDTO {
 	}
 	
 	public void setId(UUID id) {
-		this.id = UUIDHelper.obtenerValorDefecto(id);
+		this.id = UUIDHelper.getDefault();
 	}
 	
 	public Long getNumeroCarnet() {

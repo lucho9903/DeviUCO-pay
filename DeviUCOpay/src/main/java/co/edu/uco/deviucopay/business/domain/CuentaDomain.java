@@ -1,16 +1,13 @@
 package co.edu.uco.deviucopay.business.domain;
 
-import co.edu.uco.deviucopay.dto.AfiliadoDTO;
-import co.edu.uco.deviucopay.dto.TipoCuentaDTO;
-
 public class CuentaDomain {
     private Long numeroCuenta;
     private Integer contrasena;
     private Float saldo;
-    private AfiliadoDTO afiliado;
-    private TipoCuentaDTO tipoCuenta;
+    private AfiliadoDomain afiliado;
+    private TipoCuentaDomain tipoCuenta;
 
-    private CuentaDomain(final Long numeroCuenta, final Integer contrasena, final Float saldo, final AfiliadoDTO afiliado, final TipoCuentaDTO tipoCuenta) {
+    private CuentaDomain(final Long numeroCuenta, final Integer contrasena, final Float saldo, final AfiliadoDomain afiliado, final TipoCuentaDomain tipoCuenta) {
         setNumeroCuenta(numeroCuenta);
         setContrasena(contrasena);
         setSaldo(saldo);
@@ -18,32 +15,32 @@ public class CuentaDomain {
         setTipoCuenta(tipoCuenta);
     }
 
-    public static CuentaDomain build(final Long numeroCuenta, final Integer contrasena, final Float saldo, final AfiliadoDTO afiliado, final TipoCuentaDTO tipoCuenta) {
+    public static CuentaDomain build(final Long numeroCuenta, final Integer contrasena, final Float saldo, final AfiliadoDomain afiliado, final TipoCuentaDomain tipoCuenta) {
         return new CuentaDomain(numeroCuenta, contrasena, saldo, afiliado, tipoCuenta);
     }
 
     public static CuentaDomain build() {
-        return new CuentaDomain(0L, 0, 0.0f, new AfiliadoDTO(), new TipoCuentaDTO());
+        return new CuentaDomain(0L, 0, 0.0f,AfiliadoDomain.build(),TipoCuentaDomain.build());
     }
 
     private final void setNumeroCuenta(Long numeroCuenta) {
-        this.numeroCuenta = numeroCuenta == null ? 0L : numeroCuenta;
+        this.numeroCuenta = numeroCuenta;
     }
 
     private final void setContrasena(Integer contrasena) {
-        this.contrasena = contrasena == null ? 0 : contrasena;
+        this.contrasena = contrasena;
     }
 
     private final void setSaldo(Float saldo) {
-        this.saldo = saldo == null ? 0.0f : saldo;
+        this.saldo = saldo;
     }
 
-    private final void setAfiliado(AfiliadoDTO afiliado) {
-        this.afiliado = afiliado == null ? new AfiliadoDTO() : afiliado;
+    private final void setAfiliado(AfiliadoDomain afiliado) {
+        this.afiliado = afiliado;
     }
 
-    private final void setTipoCuenta(TipoCuentaDTO tipoCuenta) {
-        this.tipoCuenta = tipoCuenta == null ? new TipoCuentaDTO() : tipoCuenta;
+    private final void setTipoCuenta(TipoCuentaDomain tipoCuenta) {
+        this.tipoCuenta = tipoCuenta;
     }
 
     public Long getNumeroCuenta() {
@@ -58,11 +55,13 @@ public class CuentaDomain {
         return saldo;
     }
 
-    public AfiliadoDTO getAfiliado() {
-        return afiliado;
-    }
+	public AfiliadoDomain getAfiliado() {
+		return afiliado;
+	}
 
-    public TipoCuentaDTO getTipoCuenta() {
-        return tipoCuenta;
-    }
+	public TipoCuentaDomain getTipoCuenta() {
+		return tipoCuenta;
+	}
+
+   
 }

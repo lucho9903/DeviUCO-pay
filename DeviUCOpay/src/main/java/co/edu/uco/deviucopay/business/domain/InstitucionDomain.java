@@ -4,31 +4,31 @@ import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
-import co.edu.uco.deviucopay.dto.TipoInstitucionDTO;
+import co.edu.uco.deviucopay.business.domain.TipoInstitucionDomain;
 
 public class InstitucionDomain {
     private UUID id;
     private String nombre;
-    private TipoInstitucionDTO tipoInstitucion;
+    private TipoInstitucionDomain tipoInstitucion;
     private String correo;
 
-    private InstitucionDomain(final UUID id, final String nombre, final TipoInstitucionDTO tipoInstitucion, final String correo) {
+    private InstitucionDomain(final UUID id, final String nombre, final TipoInstitucionDomain tipoInstitucion, final String correo) {
         setId(id);
         setNombre(nombre);
         setTipoInstitucion(tipoInstitucion);
         setCorreo(correo);
     }
 
-    public static InstitucionDomain build(final UUID id, final String nombre, final TipoInstitucionDTO tipoInstitucion, final String correo) {
+    public static InstitucionDomain build(final UUID id, final String nombre, final TipoInstitucionDomain tipoInstitucion, final String correo) {
         return new InstitucionDomain(id, nombre, tipoInstitucion, correo);
     }
 
     public static InstitucionDomain build(final UUID id) {
-        return new InstitucionDomain(id, TextHelper.EMPTY, new TipoInstitucionDTO(), TextHelper.EMPTY);
+        return new InstitucionDomain(id, TextHelper.EMPTY, TipoInstitucionDomain.build(), TextHelper.EMPTY);
     }
 
     public static InstitucionDomain build() {
-        return new InstitucionDomain(UUIDHelper.getDefault(), TextHelper.EMPTY, new TipoInstitucionDTO(), TextHelper.EMPTY);
+        return new InstitucionDomain(UUIDHelper.getDefault(), TextHelper.EMPTY, TipoInstitucionDomain.build(), TextHelper.EMPTY);
     }
 
     private final void setId(UUID id) {
@@ -39,12 +39,12 @@ public class InstitucionDomain {
         this.nombre = TextHelper.applyTrim(nombre);
     }
 
-    private final void setTipoInstitucion(TipoInstitucionDTO tipoInstitucion) {
-        this.tipoInstitucion = tipoInstitucion == null ? new TipoInstitucionDTO() : tipoInstitucion;
+    private final void setTipoInstitucion(TipoInstitucionDomain tipoInstitucion) {
+        this.tipoInstitucion = tipoInstitucion;
     }
 
     private final void setCorreo(String correo) {
-        this.correo = TextHelper.applyTrim(correo);
+        this.correo = correo;
     }
 
     public UUID getId() {
@@ -55,7 +55,7 @@ public class InstitucionDomain {
         return nombre;
     }
 
-    public TipoInstitucionDTO getTipoInstitucion() {
+    public TipoInstitucionDomain getTipoInstitucion() {
         return tipoInstitucion;
     }
 

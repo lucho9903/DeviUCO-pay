@@ -30,7 +30,7 @@ public class CarnetDomain {
     }
 
     private final void setNumeroCarnet(Long numeroCarnet) {
-        this.numeroCarnet = numeroCarnet == null ? 0L : numeroCarnet;
+        this.numeroCarnet = numeroCarnet;
     }
 
     public UUID getId() {

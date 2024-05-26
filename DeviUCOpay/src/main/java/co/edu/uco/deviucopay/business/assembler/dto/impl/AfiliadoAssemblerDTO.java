@@ -30,6 +30,8 @@ public class AfiliadoAssemblerDTO implements AssemblerDTO<AfiliadoDomain, Afilia
 		
 	var afiliadoDomainTmp = getObjectHelper().getDefaultValue(domain , AfiliadoDomain.build());
 	
-		return AfiliadoDTO.build().setId(afiliadoDomainTmp.getId()).setNombre(afiliadoDomainTmp.getNombre());
+		return AfiliadoDTO.build().setId(afiliadoDomainTmp.getId();
+				
+				//.setId(afiliadoDomainTmp.getId()).setNumeroafiliado(afiliadoDomainTmp.getNumeroIdAfiliado()).set;
 	}
 }

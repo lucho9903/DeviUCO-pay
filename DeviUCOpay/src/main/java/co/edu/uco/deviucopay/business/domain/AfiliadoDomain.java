@@ -4,9 +4,7 @@ import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
-import co.edu.uco.deviucopay.dto.CarnetDTO;
-import co.edu.uco.deviucopay.dto.InstitucionDTO;
-import co.edu.uco.deviucopay.dto.TipoIdentificacionDTO;
+import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 
 public class AfiliadoDomain {
     private UUID id;
@@ -14,11 +12,11 @@ public class AfiliadoDomain {
     private String nombre;
     private String correo;
     private Long telefono;
-    private TipoIdentificacionDTO tipoIdentificacion;
-    private InstitucionDTO institucion;
-    private CarnetDTO carnet;
+    private TipoIdentificacionDomain tipoIdentificacion;
+    private InstitucionDomain institucion;
+    private CarnetDomain carnet;
 
-    private AfiliadoDomain(final UUID id, final Long numeroIdAfiliado, final String nombre, final String correo, final Long telefono, final TipoIdentificacionDTO tipoIdentificacion, final InstitucionDTO institucion, final CarnetDTO carnet) {
+    private AfiliadoDomain(final UUID id, final Long numeroIdAfiliado, final String nombre, final String correo, final Long telefono, final TipoIdentificacionDomain tipoIdentificacion, final InstitucionDomain institucion, final CarnetDomain carnet) {
         setId(id);
         setNumeroIdAfiliado(numeroIdAfiliado);
         setNombre(nombre);
@@ -29,16 +27,16 @@ public class AfiliadoDomain {
         setCarnet(carnet);
     }
 
-    public static AfiliadoDomain build(final UUID id, final Long numeroIdAfiliado, final String nombre, final String correo, final Long telefono, final TipoIdentificacionDTO tipoIdentificacion, final InstitucionDTO institucion, final CarnetDTO carnet) {
+    public static AfiliadoDomain build(final UUID id, final Long numeroIdAfiliado, final String nombre, final String correo, final Long telefono, final TipoIdentificacionDomain tipoIdentificacion, final InstitucionDomain institucion, final CarnetDomain carnet) {
         return new AfiliadoDomain(id, numeroIdAfiliado, nombre, correo, telefono, tipoIdentificacion, institucion, carnet);
     }
-    
+
     public static AfiliadoDomain build(final UUID id) {
-        return new AfiliadoDomain(id, 0L, TextHelper.EMPTY, TextHelper.EMPTY, 0L, new TipoIdentificacionDTO(), new InstitucionDTO(), new CarnetDTO());
+        return new AfiliadoDomain(id, 0L, TextHelper.EMPTY, TextHelper.EMPTY, 0L, TipoIdentificacionDomain.build(), InstitucionDomain.build(), CarnetDomain.build());
     }
-    
+
     public static AfiliadoDomain build() {
-        return new AfiliadoDomain(UUIDHelper.getDefault(), 0L, TextHelper.EMPTY, TextHelper.EMPTY, 0L, new TipoIdentificacionDTO(), new InstitucionDTO(), new CarnetDTO());
+        return new AfiliadoDomain(UUIDHelper.getDefault(), 0L, TextHelper.EMPTY, TextHelper.EMPTY, 0L, TipoIdentificacionDomain.build(), InstitucionDomain.build(), CarnetDomain.build());
     }
 
     private final void setId(UUID id) {
@@ -49,44 +47,7 @@ public class AfiliadoDomain {
         this.numeroIdAfiliado = numeroIdAfiliado == null ? 0L : numeroIdAfiliado;
     }
 
-    private final void setTipoIdentificacion(TipoIdentificacionDTO tipoIdentificacion) {
-        this.tipoIdentificacion = (tipoIdentificacion == null);
-    }
-    
-
-    public UUID getId() {
-		return id;
-	}
-
-	public Long getNumeroIdAfiliado() {
-		return numeroIdAfiliado;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public Long getTelefono() {
-		return telefono;
-	}
-
-	public TipoIdentificacionDTO getTipoIdentificacion() {
-		return tipoIdentificacion;
-	}
-
-	public InstitucionDTO getInstitucion() {
-		return institucion;
-	}
-
-	public CarnetDTO getCarnet() {
-		return carnet;
-	}
-
-	private final void setNombre(String nombre) {
+    private final void setNombre(String nombre) {
         this.nombre = TextHelper.applyTrim(nombre);
     }
 
@@ -95,7 +56,51 @@ public class AfiliadoDomain {
     }
 
     private final void setTelefono(Long telefono) {
-        this.telefono = telefono == null ? 0L : telefono;
+        this.telefono = telefono;
     }
 
+    private final void setTipoIdentificacion(TipoIdentificacionDomain tipoIdentificacion) {
+        this.tipoIdentificacion = TipoIdentificacionDomain.build();
+    }
+
+    private final void setInstitucion(InstitucionDomain institucion) {
+        this.institucion = institucion;
+    }
+
+    private final void setCarnet(CarnetDomain carnet) {
+        this.carnet = carnet;
+    }
+
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Long getNumeroIdAfiliado() {
+        return numeroIdAfiliado;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public Long getTelefono() {
+        return telefono;
+    }
+
+    public TipoIdentificacionDomain getTipoIdentificacion() {
+        return tipoIdentificacion;
+    }
+
+    public InstitucionDomain getInstitucion() {
+        return institucion;
+    }
+
+    public CarnetDomain getCarnet() {
+        return carnet;
+    }
 }
