@@ -22,7 +22,7 @@ public class CarnetAssemblerDTO implements AssemblerDTO<CarnetDomain, CarnetDTO>
 	public final CarnetDomain todomain(final CarnetDTO date) {
 		var carnetDtoTmp =getObjectHelper().getDefaultValue(date , CarnetDTO.build());
 	
-		return CarnetDomain.build(carnetDtoTmp.getId(),carnetDtoTmp.getNombre(), null);
+		return CarnetDomain.build(carnetDtoTmp.getId(),carnetDtoTmp.getNumeroCarnet());
 	}
 
 	@Override

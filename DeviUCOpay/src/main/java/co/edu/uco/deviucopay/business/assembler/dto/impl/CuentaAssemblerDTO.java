@@ -22,13 +22,13 @@ public class CuentaAssemblerDTO implements AssemblerDTO<CuentaDomain, CuentaDTO>
 	public final CuentaDomain todomain(final CuentaDTO date) {
 		var cuentaDtoTmp =getObjectHelper().getDefaultValue(date , CuentaDTO.build());
 	
-		return CuentaDomain.build(cuentaDtoTmp.getId(),cuentaDtoTmp.getNombre(), null);
+		return CuentaDomain.build(cuentaDtoTmp.getNumeroCuenta(),cuentaDtoTmp.getContraseña(), cuentaDtoTmp.getSaldo(), cuentaDtoTmp.getAfiliado(), cuentaDtoTmp.getTipoCuenta());
 	}
 
 	@Override
 	public final CuentaDTO toDTO(final CuentaDomain domain) {
 		
-	var cuentaDomainTmp = getObjectHelper().getDefaultValue(domain , cuentaDomain.build());
+	var cuentaDomainTmp = getObjectHelper().getDefaultValue(domain , CuentaDomain.build());
 	
 		return CuentaDTO.build().setId(cuentaDomainTmp.get()).setNombre(cuentaDomainTmp.getNombre());
 	}

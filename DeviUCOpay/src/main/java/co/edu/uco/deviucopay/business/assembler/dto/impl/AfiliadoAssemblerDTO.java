@@ -22,13 +22,13 @@ public class AfiliadoAssemblerDTO implements AssemblerDTO<AfiliadoDomain, Afilia
 	public final AfiliadoDomain todomain(final AfiliadoDTO date) {
 		var afiliadoDtoTmp =getObjectHelper().getDefaultValue(date , AfiliadoDTO.build());
 	
-		return AfiliadoDomain.build(afiliadoDtoTmp.getId(),afiliadoDtoTmp.getNombre(), null);
+		return AfiliadoDomain.build(afiliadoDtoTmp.getId(),afiliadoDtoTmp.getNumeroIdAfiliado(),afiliadoDtoTmp.getNombre(),afiliadoDtoTmp.getCorreo(),afiliadoDtoTmp.getTelefono(), afiliadoDtoTmp.getTipoIdentificacion(), afiliadoDtoTmp.getInstitucion(), afiliadoDtoTmp.getCarnet());
 	}
 
 	@Override
 	public final AfiliadoDTO toDTO(final AfiliadoDomain domain) {
 		
-	var afiliadoDomainTmp = getObjectHelper().getDefaulValue(domain , afiliadoDomain.build());
+	var afiliadoDomainTmp = getObjectHelper().getDefaultValue(domain , AfiliadoDomain.build());
 	
 		return AfiliadoDTO.build().setId(afiliadoDomainTmp.getId()).setNombre(afiliadoDomainTmp.getNombre());
 	}

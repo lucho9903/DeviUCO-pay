@@ -20,7 +20,7 @@ public class CuentaDTO {
 		setTipoCuenta(tipoCuenta);
 	}
 	
-	public static final CuentaDTO buil() {
+	public static final CuentaDTO build() {
 		return new CuentaDTO;
 		
 	}
