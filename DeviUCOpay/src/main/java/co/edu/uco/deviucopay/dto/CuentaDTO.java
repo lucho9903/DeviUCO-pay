@@ -1,44 +1,48 @@
 package co.edu.uco.deviucopay.dto;
 
-import co.edu.uco.deviucopay.crosscutting.helpers.LongHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 
 public class CuentaDTO {
 	
-	private Long numeroCuenta;
-	private Integer contraseña;
+	private String numeroCuenta;
+	private String contraseña;
 	private Float saldo;
 	private AfiliadoDTO afiliado;
 	private TipoCuentaDTO tipoCuenta;
 	
-	public CuentaDTO(Long numeroCuenta, Integer contraseña, Float saldo, AfiliadoDTO afiliado,TipoCuentaDTO tipoCuenta) {
+	public CuentaDTO(String numeroCuenta, String contraseña, Float saldo, AfiliadoDTO afiliado,TipoCuentaDTO tipoCuenta) {
 		super();
-		setNumeroCuenta(numeroCuenta);;
+		setNumeroCuenta(numeroCuenta);
 		setContraseña(contraseña);
 		setSaldo(saldo);
 		setAfiliado(afiliado);
 		setTipoCuenta(tipoCuenta);
 	}
 	
+	public CuentaDTO() {
+		super();
+	}
 	public static final CuentaDTO build() {
-		return new CuentaDTO;
+		
+		return new CuentaDTO();
 		
 	}
 
-	public Long getNumeroCuenta() {
+	public String getNumeroCuenta() {
 		return numeroCuenta;
 	}
 
-	public void setNumeroCuenta(Long numeroCuenta) {
-		this.numeroCuenta = LongHelper.getDefaultValue(numeroCuenta);
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = TextHelper.applyTrim(numeroCuenta);
 	}
 
-	public Integer getContraseña() {
+	public String getContraseña() {
 		return contraseña;
 	}
 
-	public void setContraseña(Integer contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseña(String contraseña) {
+		this.contraseña = TextHelper.applyTrim(contraseña);
 	}
 
 	public Float getSaldo() {

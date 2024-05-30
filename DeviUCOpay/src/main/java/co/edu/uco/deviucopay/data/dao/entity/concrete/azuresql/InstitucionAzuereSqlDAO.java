@@ -1,34 +1,164 @@
 package co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.InstitucionDAO;
 import co.edu.uco.deviucopay.entity.InstitucionEntity;
 
 public class InstitucionAzuereSqlDAO implements InstitucionDAO{
 
 	@Override
-	public void crear(InstitucionEntity data) {
-		// TODO Auto-generated method stub
-		
-	}
+	 public final void crear(final InstitucionEntity data) {
+        final StringBuilder sentenciasSql = new StringBuilder();
+
+        sentenciasSql.append("INSERT INTO ciudad (id, nombre, departamento) ");
+        sentenciasSql.append("VALUES (?, ?, ?)");
+
+        try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciasSql.toString())) {
+            sentenciaSqlPreparada.setObject(1, data.getId());
+            sentenciaSqlPreparada.setString(2, data.getNombre());
+            sentenciaSqlPreparada.setObject(3, data.getTipoInstitucion().getId());
+            sentenciaSqlPreparada.setObject(4, data.getCorreo());
+
+
+            sentenciaSqlPreparada.executeUpdate();
+
+        } catch (final SQLException exception) {
+            var mensajeUsuario = "Se ha presentado un problema tratando de crear la ciudad \"" + data.getNombre() + "\" por favor intente de nuevo y si el problema persiste contacte al administrador...";
+            var mensajeTecnico = "Se ha presentado una excepción de tipo SQLException tratando de realizar el INSERT de la ciudad \"" + data.getNombre() + "\" para más detalles revise la excepción raíz presentada..";
+
+            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+        } catch (final Exception exception) {
+            var mensajeUsuario = "Se ha presentado un problema tratando de crear la ciudad \"" + data.getNombre() + "\" por favor intente de nuevo y si el problema persiste contacte al administrador...";
+            var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar el INSERT de la ciudad \"" + data.getNombre() + "\" para más detalles revise la excepción raíz presentada..";
+
+            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+        }
 
 	@Override
-	public void eliminar(InstitucionEntity data) {
-		// TODO Auto-generated method stub
-		
-	}
+	public final void eliminar(final UUID id) {
+        final StringBuilder sentenciasSql = new StringBuilder();
+
+        sentenciasSql.append("DELETE FROM ciudad ");
+        sentenciasSql.append("WHERE id = ?");
+
+        try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciasSql.toString())) {
+
+            sentenciaSqlPreparada.setObject(1, id);
+
+            sentenciaSqlPreparada.executeUpdate();
+
+        } catch (final SQLException exception) {
+            var mensajeUsuario = "Se ha presentado un problema tratando de eliminar la ciudad con ID \"" + id + "\" por favor intente de nuevo y si el problema persiste contacte al administrador...";
+            var mensajeTecnico = "Se ha presentado una excepción de tipo SQLException tratando de realizar el DELETE de la ciudad con ID \"" + id + "\" para más detalles revise la excepción raíz presentada..";
+
+            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+        } catch (final Exception exception) {
+            var mensajeUsuario = "Se ha presentado un problema tratando de eliminar la ciudad con ID \"" + id + "\" por favor intente de nuevo y si el problema persiste contacte al administrador...";
+            var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar el DELETE de la ciudad con ID \"" + id + "\" para más detalles revise la excepción raíz presentada..";
+
+            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+        }
+    }
 
 	@Override
-	public void modificar(InstitucionEntity data) {
-		// TODO Auto-generated method stub
-		
-	}
+	 public final void modificar(final InstitucionEntity data) {
+        final StringBuilder sentenciasSql = new StringBuilder();
+
+        sentenciasSql.append("UPDATE ciudad ");
+        sentenciasSql.append("SET nombre = ?, departamento = ? ");
+        sentenciasSql.append("WHERE id = ?");
+
+        try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciasSql.toString())) {
+
+            sentenciaSqlPreparada.setString(1, data.getNombre());
+            sentenciaSqlPreparada.setObject(2, data.getDepartamento().getId());
+            sentenciaSqlPreparada.setObject(3, data.getId());
+
+            sentenciaSqlPreparada.executeUpdate();
+
+        } catch (final SQLException exception) {
+            var mensajeUsuario = "Se ha presentado un problema tratando de modificar la ciudad \"" + data.getNombre() + "\" por favor intente de nuevo y si el problema persiste contacte al administrador...";
+            var mensajeTecnico = "Se ha presentado una excepción de tipo SQLException tratando de realizar el UPDATE de la ciudad \"" + data.getNombre() + "\" para más detalles revise la excepción raíz presentada..";
+
+            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+        } catch (final Exception exception) {
+            var mensajeUsuario = "Se ha presentado un problema tratando de modificar la ciudad \"" + data.getNombre() + "\" por favor intente de nuevo y si el problema persiste contacte al administrador...";
+            var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar el UPDATE de la ciudad \"" + data.getNombre() + "\" para más detalles revise la excepción raíz presentada..";
+
+            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+        }
+    }
 
 	@Override
-	public List<InstitucionEntity> consultar(InstitucionEntity data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public final List<InstitucionEntity> consultar(final InstitucionEntity data) {
+        final List<InstitucionEntity> ciudades = new ArrayList<>();
+        String sentenciasSql =
+                "SELECT id, nombre, departamento " +
+                "FROM ciudad ";
+
+        if (data != null) {
+            boolean whereAdded = false;
+            if (data.getId() != null) {
+                sentenciasSql += "WHERE id = ? ";
+                whereAdded = true;
+            }
+            if (data.getNombre() != null && !data.getNombre().isEmpty()) {
+                sentenciasSql += (whereAdded ? "AND " : "WHERE ") + "nombre LIKE ? ";
+                whereAdded = true;
+            }
+            if (data.getDepartamento() != null && data.getDepartamento().getId() != null) {
+                sentenciasSql += (whereAdded ? "AND " : "WHERE ") + "departamento = ? ";
+            }
+        }
+
+        try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciasSql)) {
+
+            int index = 1;
+            if (data != null) {
+                if (data.getId() != null) {
+                    sentenciaSqlPreparada.setObject(index++, data.getId());
+                }
+                if (data.getNombre() != null && !data.getNombre().isEmpty()) {
+                    sentenciaSqlPreparada.setString(index++, "%" + data.getNombre() + "%");
+                }
+                if (data.getDepartamento() != null && data.getDepartamento().getId() != null) {
+                    sentenciaSqlPreparada.setObject(index++, data.getDepartamento().getId());
+                }
+            }
+
+            try (var resultado = sentenciaSqlPreparada.executeQuery()) {
+                while (resultado.next()) {
+                    InstitucionEntity ciudad = new InstitucionEntity();
+                    ciudad.setId((UUID) resultado.getObject("id"));
+                    ciudad.setNombre(resultado.getString("nombre"));
+
+                    UUID departamentoId = (UUID) resultado.getObject("departamento");
+                    DepartamentoEntity departamento = departamentoDAO.obtenerPorId(departamentoId); 
+                    ciudad.setDepartamento(departamento);
+
+                    ciudades.add(ciudad);
+                }
+            }
+
+        } catch (final SQLException exception) {
+            var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades por favor intente de nuevo y si el problema persiste contacte al administrador...";
+            var mensajeTecnico = "Se ha presentado una excepción de tipo SQLException tratando de realizar la consulta de las ciudades para más detalles revise la excepción raíz presentada..";
+
+            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+        } catch (final Exception exception) {
+            var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades por favor intente de nuevo y si el problema persiste contacte al administrador...";
+            var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar la consulta de las ciudades para más detalles revise la excepción raíz presentada..";
+
+            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+        }
+
+        return ciudades;
+    }
 
 }

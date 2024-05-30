@@ -6,20 +6,21 @@ import co.edu.uco.deviucopay.crosscutting.helpers.LongHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
+import co.edu.uco.deviucopay.dto.TipoIdentificacionDTO;
 
 public class AfiliadoEntity {
 	
 	private UUID id;
-	private Long numeroIdAfiliado;
+	private String numeroIdAfiliado;
 	private String nombre;
 	private String correo;
-	private Long telefono;
+	private String telefono;
 	private TipoIdentificacionEntity tipoIdentificacion;
 	private InstitucionEntity institucion;
 	private CarnetEntity carnet;
 	
 	
-	public AfiliadoEntity(UUID id, Long numeroIdAfiliado, String nombre, String correo, Long telefono,
+	public AfiliadoEntity(UUID id, String numeroIdAfiliado, String nombre, String correo, String telefono,
 			TipoIdentificacionEntity tipoIdentificacion, InstitucionEntity institucion, CarnetEntity carnet) {
 		super();
 		this.id = id;
@@ -47,17 +48,17 @@ public class AfiliadoEntity {
 
 
 	public void setId(UUID id) {
-		this.id = UUIDHelper.obtenerValorDefecto(id);
+		this.id = UUIDHelper.getDefault();
 	}
 
 
-	public Long getNumeroIdAfiliado() {
+	public String getNumeroIdAfiliado() {
 		return numeroIdAfiliado;
 	}
 
 
-	public void setNumeroIdAfiliado(Long numeroIdAfiliado) {
-		this.numeroIdAfiliado = LongHelper.getDefaultValue(numeroIdAfiliado);
+	public void setNumeroIdAfiliado(String numeroIdAfiliado) {
+		this.numeroIdAfiliado = TextHelper.applyTrim(numeroIdAfiliado);
 	}
 
 
@@ -81,13 +82,13 @@ public class AfiliadoEntity {
 	}
 
 
-	public Long getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
 
-	public void setTelefono(Long telefono) {
-		this.telefono = LongHelper.getDefaultValue(telefono);
+	public void setTelefono(String telefono) {
+		this.telefono = TextHelper.applyTrim(telefono);
 	}
 
 
@@ -97,7 +98,7 @@ public class AfiliadoEntity {
 
 
 	public void setTipoIdentificacion(TipoIdentificacionEntity tipoIdentificacion) {
-		this.tipoIdentificacion = ObjectHelper.getObjectHelper().getDefaultValue(tipoIdentificacion,new TipoIdentificacionDTO());
+		this.tipoIdentificacion = ObjectHelper.getObjectHelper().getDefaultValue(tipoIdentificacion, new TipoIdentificacionEntity());
 	}
 
 

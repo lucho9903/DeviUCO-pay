@@ -3,6 +3,7 @@ import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
+import co.edu.uco.deviucopay.dto.TipoInstitucionDTO;
 
 
 public class InstitucionEntity {
@@ -30,7 +31,7 @@ public class InstitucionEntity {
 	}
 
 	public void setTipoInstitucion(TipoInstitucionEntity tipoInstitucion) {
-		this.tipoInstitucion = ObjectHelper.getObjectHelper().getDefaultValue(tipoInstitucion, new TipoInstitucionDTO());
+		this.tipoInstitucion = ObjectHelper.getObjectHelper().getDefaultValue(tipoInstitucion,new TipoInstitucionEntity());
 	}
 
 	public static final InstitucionEntity build() {

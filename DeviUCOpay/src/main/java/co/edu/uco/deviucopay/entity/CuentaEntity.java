@@ -2,16 +2,17 @@ package co.edu.uco.deviucopay.entity;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.LongHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 
 public class CuentaEntity {
 	
-	private Long numeroCuenta;
-	private Integer contraseña;
+	private String numeroCuenta;
+	private String contraseña;
 	private Float saldo;
 	private AfiliadoEntity afiliado;
 	private TipoCuentaEntity tipoCuenta;
 	
-	public CuentaEntity(Long numeroCuenta, Integer contraseña, Float saldo, AfiliadoEntity afiliado,TipoCuentaEntity tipoCuenta) {
+	public CuentaEntity(String numeroCuenta, String contraseña, Float saldo, AfiliadoEntity afiliado,TipoCuentaEntity tipoCuenta) {
 		
 		setNumeroCuenta(numeroCuenta);;
 		setContraseña(contraseña);
@@ -20,20 +21,20 @@ public class CuentaEntity {
 		setTipoCuenta(tipoCuenta);
 	}
 
-	public Long getNumeroCuenta() {
+	public String getNumeroCuenta() {
 		return numeroCuenta;
 	}
 
-	public void setNumeroCuenta(Long numeroCuenta) {
-		this.numeroCuenta = LongHelper.getDefaultValue(numeroCuenta);
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = TextHelper.applyTrim(numeroCuenta);
 	}
 
-	public Integer getContraseña() {
+	public String getContraseña() {
 		return contraseña;
 	}
 
-	public void setContraseña(Integer contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseña(String contraseña) {
+		this.contraseña = TextHelper.applyTrim(contraseña);
 	}
 
 	public Float getSaldo() {

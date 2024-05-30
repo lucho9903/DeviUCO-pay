@@ -10,18 +10,18 @@ import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
 public class AfiliadoDTO {
 	
 	private UUID id;
-	private Long numeroIdAfiliado;
+	private String numeroIdAfiliado;
 	private String nombre;
 	private String correo;
-	private Long telefono;
+	private String telefono;
 	private TipoIdentificacionDTO tipoIdentificacion;
 	private InstitucionDTO institucion;
 	private CarnetDTO carnet;
 	
 	
-	public AfiliadoDTO(UUID id, Long numeroIdAfiliado, String nombre, String correo, Long telefono,
+	public AfiliadoDTO(UUID id, String numeroIdAfiliado, String nombre, String correo, String telefono,
 			TipoIdentificacionDTO tipoIdentificacion, InstitucionDTO institucion, CarnetDTO carnet) {
-		super ();
+		
 		setId (id);
 		setNumeroIdAfiliado (numeroIdAfiliado);
 		setNombre(nombre);
@@ -51,13 +51,13 @@ public class AfiliadoDTO {
 	}
 
 
-	public Long getNumeroIdAfiliado() {
+	public String getNumeroIdAfiliado() {
 		return numeroIdAfiliado;
 	}
 
 
-	public void setNumeroIdAfiliado(Long numeroIdAfiliado) {
-		this.numeroIdAfiliado = LongHelper.getDefaultValue(numeroIdAfiliado);
+	public void setNumeroIdAfiliado(String numeroIdAfiliado) {
+		this.numeroIdAfiliado = TextHelper.applyTrim(numeroIdAfiliado);
 	}
 
 
@@ -81,13 +81,13 @@ public class AfiliadoDTO {
 	}
 
 
-	public Long getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
 
-	public void setTelefono(Long telefono) {
-		this.telefono = LongHelper.getDefaultValue(telefono);
+	public void setTelefono(String telefono) {
+		this.telefono = TextHelper.applyTrim(telefono);
 	}
 
 

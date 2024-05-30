@@ -3,18 +3,19 @@ package co.edu.uco.deviucopay.entity;
 import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.LongHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
 
 public class CarnetEntity {
 	
 	private UUID id;
-	private Long numeroCarnet;
+	private String numeroCarnet;
 	
 	
 	
 	
 	
-	public CarnetEntity(UUID id, Long numeroCarnet) {
+	public CarnetEntity(UUID id, String numeroCarnet) {
 		setId(id);
 		setNumeroCarnet(numeroCarnet);
 	}
@@ -36,12 +37,12 @@ public class CarnetEntity {
 		this.id = UUIDHelper.getDefault(id, null);
 	}
 	
-	public Long getNumeroCarnet() {
+	public String getNumeroCarnet() {
 		return numeroCarnet;
 	}
 	
-	public void setNumeroCarnet(Long numeroCarnet) {
-		this.numeroCarnet = LongHelper.getDefaultValue(numeroCarnet);
+	public void setNumeroCarnet(String numeroCarnet) {
+		this.numeroCarnet = TextHelper.applyTrim(numeroCarnet);
 	}
 		
 	
