@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
+import co.edu.uco.deviucopay.dto.TipoInstitucionDTO;
 import co.edu.uco.deviucopay.business.domain.TipoInstitucionDomain;
 
 public class InstitucionDomain {
@@ -19,8 +20,8 @@ public class InstitucionDomain {
         setCorreo(correo);
     }
 
-    public static InstitucionDomain build(final UUID id, final String nombre, final TipoInstitucionDomain tipoInstitucion, final String correo) {
-        return new InstitucionDomain(id, nombre, tipoInstitucion, correo);
+    public static InstitucionDomain build(final UUID id, final String nombre, final TipoInstitucionDTO tipoInstitucionDTO, final String correo) {
+        return new InstitucionDomain(id, nombre, tipoInstitucionDTO, correo);
     }
 
     public static InstitucionDomain build(final UUID id) {
