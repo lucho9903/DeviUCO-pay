@@ -8,11 +8,12 @@ import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.InstitucionDAO;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.SqlConnection;
 import co.edu.uco.deviucopay.entity.InstitucionEntity;
 
-public class InstitucionAzuereSqlDAO implements InstitucionDAO{
+public class InstitucionAzuereSqlDAO extends SqlConnection implements InstitucionDAO{
 
-	@Override
+	/*@Override
 	 public final void crear(final InstitucionEntity data) {
         final StringBuilder sentenciasSql = new StringBuilder();
 
@@ -94,7 +95,7 @@ public class InstitucionAzuereSqlDAO implements InstitucionDAO{
             throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
         }
     }
-
+*/
 	@Override
 	public final List<InstitucionEntity> consultar(final InstitucionEntity data) {
         final List<InstitucionEntity> ciudades = new ArrayList<>();
@@ -160,5 +161,11 @@ public class InstitucionAzuereSqlDAO implements InstitucionDAO{
 
         return ciudades;
     }
+
+	@Override
+	public void eliminar(InstitucionEntity data) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
