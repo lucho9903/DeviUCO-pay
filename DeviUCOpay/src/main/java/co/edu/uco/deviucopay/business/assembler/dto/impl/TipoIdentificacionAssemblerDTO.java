@@ -2,6 +2,8 @@ package co.edu.uco.deviucopay.business.assembler.dto.impl;
 
 import static co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper.getObjectHelper;
 
+import java.util.List;
+
 import co.edu.uco.deviucopay.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.deviucopay.business.domain.TipoCuentaDomain;
 import co.edu.uco.deviucopay.business.domain.TipoIdentificacionDomain;
@@ -32,6 +34,18 @@ public class TipoIdentificacionAssemblerDTO implements AssemblerDTO<TipoIdentifi
 		
 	var tipoIdentificacionDomainTmp = getObjectHelper().getDefaultValue(domain , TipoCuentaDomain.build());
 	
-		return TipoCuentaDTO.build().setId(tipoIdentificacionDomainTmp.getId()).setNombre(tipoIdentificacionDomainTmp.getNombre());
+		return TipoCuentaDTO.build().setId(tipoIdentificacionDomainTmp.getId()).setNombre(tipoIdentificacionDomainTmp.getNombre()).set;
+	}
+
+	@Override
+	public List<TipoIdentificacionDomain> toDomainCollection(List<TipoIdentificacionDTO> entituCollection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TipoIdentificacionDTO> toDTOCollection(List<TipoIdentificacionDomain> domainCollection) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

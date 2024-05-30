@@ -2,9 +2,12 @@ package co.edu.uco.deviucopay.business.assembler.dto.impl;
 
 import static co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper.getObjectHelper;
 
+import java.util.List;
+import java.util.ArrayList;
 import co.edu.uco.deviucopay.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.deviucopay.business.domain.InstitucionDomain;
 import co.edu.uco.deviucopay.dto.InstitucionDTO;
+import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 
 public class InstitucionAssemblerDTO implements AssemblerDTO<InstitucionDomain, InstitucionDTO> {
 
@@ -31,5 +34,26 @@ public class InstitucionAssemblerDTO implements AssemblerDTO<InstitucionDomain, 
 	var institucionDomainTmp = getObjectHelper().getDefaultValue(domain , InstitucionDomain.build());
 	
 		return InstitucionDTO.build().setId(institucionDomainTmp.getId()).setNombre(institucionDomainTmp.getNombre());
+	}
+
+	@Override
+	public final List<InstitucionDomain> toDomainCollection(final List<InstitucionDTO> dtoCollection) {
+		var dtoCollectionTmp = ObjectHelper.getObjectHelper()
+				.getDefaultValue(dtoCollection, new ArrayList<InstitucionDTO>());
+		var resultadoDomain = new ArrayList<InstitucionDomain>();
+		
+		for (InstitucionDTO institucionDto : dtoCollectionTmp) {
+			var institucionDomainTmp = todomain(institucionDto);
+			resultadoDomain.add(institucionDomainTmp);
+		}
+		
+		return resultadoDomain;
+	}
+
+	@Override
+	public final List<InstitucionDTO> toDTOCollection(final List<InstitucionDomain> domainCollection) {
+		var domainCollectionTmp = ObjectHelper.getObjectHelper()
+				.getDefaultValue(domainCollection, new ArrayList<InstitucionDomain>());
+		return domainCollectionTmp.stream().map(this::toDTO).toList();
 	}
 }
