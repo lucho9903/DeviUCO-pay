@@ -4,14 +4,13 @@ import static co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper.getObjectH
 
 import java.util.List;
 import java.util.ArrayList;
-
 import co.edu.uco.deviucopay.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.deviucopay.business.domain.AfiliadoDomain;
 import co.edu.uco.deviucopay.dto.AfiliadoDTO;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 
 public class AfiliadoAssemblerDTO implements AssemblerDTO<AfiliadoDomain, AfiliadoDTO> {
-
+	
 	private static final AssemblerDTO<AfiliadoDomain, AfiliadoDTO>  instance = new AfiliadoAssemblerDTO();
 	
 	
@@ -22,20 +21,25 @@ public class AfiliadoAssemblerDTO implements AssemblerDTO<AfiliadoDomain, Afilia
 	public static final AssemblerDTO<AfiliadoDomain, AfiliadoDTO> getInstance(){
 		return instance;
 	}
+
 	@Override
-	public final AfiliadoDomain todomain(final AfiliadoDTO date) {
-		var afiliadoDomainTmp =getObjectHelper().getDefaultValue(date , AfiliadoDTO.build());
+	public AfiliadoDomain toDomain(AfiliadoDTO data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-		return AfiliadoDomain.build(afiliadoDomainTmp.getId(),afiliadoDomainTmp.getNumeroIdAfiliado(),afiliadoDomainTmp.getNombre(),afiliadoDomainTmp.getCorreo(),afiliadoDomainTmp.getTelefono(), afiliadoDomainTmp.getTipoIdentificacion(), afiliadoDomainTmp.getInstitucion(), afiliadoDomainTmp.getCarnet());
+	@Override
+	public AfiliadoDTO toDTO(final AfiliadoDomain domain) {
+		var ciudadDomainTmp = getObjectHelper().getDefaultValue(domain, AfiliadoDomain.build());
+		return AfiliadoDTO.build().setId(ciudadDomainTmp.getId()).setNombre(ciudadDomainTmp.getNombre());
 	}
 
 	@Override
 	public final List<AfiliadoDomain> toDomainCollection(final List<AfiliadoDTO> dtoCollection) {
-		var dtoCollectionTmp = ObjectHelper.getObjectHelper()
-				.getDefaultValue(dtoCollection, new ArrayList<AfiliadoDTO>());
+		var dtoCollectioTmp = ObjectHelper.getObjectHelper().getDefaultValue(dtoCollection, new ArrayList<AfiliadoDTO>());
 		var resultadoDomain = new ArrayList<AfiliadoDomain>();
 		
-		for (AfiliadoDTO afiliadoDto : dtoCollectionTmp) {
+		for (AfiliadoDTO afiliadoDto : dtoCollectioTmp) {
 			var afiliadoDomainTmp = toDomain(afiliadoDto);
 			resultadoDomain.add(afiliadoDomainTmp);
 		}
@@ -44,17 +48,10 @@ public class AfiliadoAssemblerDTO implements AssemblerDTO<AfiliadoDomain, Afilia
 	}
 
 	@Override
-	public AfiliadoDTO toDTO(AfiliadoDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public final List<AfiliadoDTO> toDTOCollection(final List<AfiliadoDomain> domainCollection) {
 		var domainCollectionTmp = ObjectHelper.getObjectHelper()
 				.getDefaultValue(domainCollection, new ArrayList<AfiliadoDomain>());
 		return domainCollectionTmp.stream().map(this::toDTO).toList();
 	}
-
 	
 }

@@ -2,7 +2,7 @@ package co.edu.uco.deviucopay.entity;
 
 import java.util.UUID;
 
-import co.edu.uco.deviucopay.crosscutting.helpers.LongHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.FloatHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
 

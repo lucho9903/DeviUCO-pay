@@ -1,54 +1,83 @@
 package co.edu.uco.deviucopay.business.domain;
 
+import java.util.UUID;
+
+import co.edu.uco.deviucopay.crosscutting.helpers.FloatHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
+
 public class CuentaDomain {
-    private Long numeroCuenta;
-    private Integer contrasena;
+	private UUID id;
+    private String numeroCuenta;
+    private String pin;
     private Float saldo;
     private AfiliadoDomain afiliado;
     private TipoCuentaDomain tipoCuenta;
+    private CarnetDomain carnet;
 
-    private CuentaDomain(final Long numeroCuenta, final Integer contrasena, final Float saldo, final AfiliadoDomain afiliado, final TipoCuentaDomain tipoCuenta) {
-        setNumeroCuenta(numeroCuenta);
-        setContrasena(contrasena);
+    private CuentaDomain(final UUID id, final String numeroCuenta, final String pin, final Float saldo, final AfiliadoDomain afiliado, final TipoCuentaDomain tipoCuenta, final CarnetDomain carnet) {
+        setId(id);
+    	setNumeroCuenta(numeroCuenta);
+        setPin(pin);
         setSaldo(saldo);
         setAfiliado(afiliado);
         setTipoCuenta(tipoCuenta);
+        setCarnet(carnet);
     }
 
-    public static CuentaDomain build(final Long numeroCuenta, final Integer contrasena, final Float saldo, final AfiliadoDomain afiliado, final TipoCuentaDomain tipoCuenta) {
-        return new CuentaDomain(numeroCuenta, contrasena, saldo, afiliado, tipoCuenta);
+    public static CuentaDomain build(final UUID id, String numeroCuenta, final String pin,final Float saldo, final AfiliadoDomain afiliado,
+    		final TipoCuentaDomain tipoCuenta, final CarnetDomain carnet) {
+        return new CuentaDomain(id, numeroCuenta, pin, saldo, afiliado, tipoCuenta, carnet);
+    }
+    public static CuentaDomain build(final UUID id) {
+        return new CuentaDomain(id, TextHelper.EMPTY,TextHelper.EMPTY,FloatHelper.ZERO,
+        		AfiliadoDomain.build(),TipoCuentaDomain.build(),
+        		CarnetDomain.build());
     }
 
     public static CuentaDomain build() {
-        return new CuentaDomain(0L, 0, 0.0f,AfiliadoDomain.build(),TipoCuentaDomain.build());
+        return new CuentaDomain(UUIDHelper.getDefault(),TextHelper.EMPTY, TextHelper.EMPTY, FloatHelper.ZERO,
+        		AfiliadoDomain.build(),TipoCuentaDomain.build(),
+        		CarnetDomain.build());
+    }
+    
+    private final void setId(UUID id) {
+        this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault()); 
     }
 
-    private final void setNumeroCuenta(Long numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
+    private final void setNumeroCuenta(String numeroCuenta) {
+        this.numeroCuenta = TextHelper.applyTrim(numeroCuenta);
     }
 
-    private final void setContrasena(Integer contrasena) {
-        this.contrasena = contrasena;
+    private final void setPin(String pin) {
+        this.pin = TextHelper.applyTrim(pin);
     }
 
     private final void setSaldo(Float saldo) {
-        this.saldo = saldo;
+        this.saldo = FloatHelper.getDefaultValue(saldo);
     }
 
     private final void setAfiliado(AfiliadoDomain afiliado) {
-        this.afiliado = afiliado;
+        this.afiliado = ObjectHelper.getObjectHelper().getDefaultValue(afiliado, AfiliadoDomain.build());
     }
 
     private final void setTipoCuenta(TipoCuentaDomain tipoCuenta) {
-        this.tipoCuenta = tipoCuenta;
+        this.tipoCuenta = ObjectHelper.getObjectHelper().getDefaultValue(tipoCuenta, TipoCuentaDomain.build());
+    }
+    private final void setCarnet(CarnetDomain carnet) {
+        this.carnet = ObjectHelper.getObjectHelper().getDefaultValue(carnet, CarnetDomain.build());
+    }
+    public UUID getId() {
+        return id;
     }
 
-    public Long getNumeroCuenta() {
+    public String getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public Integer getContrasena() {
-        return contrasena;
+    public String getPin() {
+        return pin;
     }
 
     public Float getSaldo() {
@@ -62,6 +91,7 @@ public class CuentaDomain {
 	public TipoCuentaDomain getTipoCuenta() {
 		return tipoCuenta;
 	}
-
-   
+	public CarnetDomain getCarnet() {
+		return carnet;
+	}  
 }

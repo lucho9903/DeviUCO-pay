@@ -2,7 +2,6 @@ package co.edu.uco.deviucopay.dto;
 
 import java.util.UUID;
 
-import co.edu.uco.deviucopay.crosscutting.helpers.LongHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
@@ -16,11 +15,23 @@ public class AfiliadoDTO {
 	private String telefono;
 	private TipoIdentificacionDTO tipoIdentificacion;
 	private InstitucionDTO institucion;
-	private CarnetDTO carnet;
 	
+	
+	public AfiliadoDTO() {
+		super();
+		setId(UUIDHelper.getDefault());
+		setNumeroIdAfiliado(TextHelper.EMPTY);
+		setNombre(TextHelper.EMPTY);
+		setCorreo(TextHelper.EMPTY);
+		setTelefono(TextHelper.EMPTY);
+		setTipoIdentificacion(TipoIdentificacionDTO.build());
+		setInstitucion(InstitucionDTO.build());
+		
+		
+	}	
 	
 	public AfiliadoDTO(UUID id, String numeroIdAfiliado, String nombre, String correo, String telefono,
-			TipoIdentificacionDTO tipoIdentificacion, InstitucionDTO institucion, CarnetDTO carnet) {
+			TipoIdentificacionDTO tipoIdentificacion, InstitucionDTO institucion) {
 		
 		setId (id);
 		setNumeroIdAfiliado (numeroIdAfiliado);
@@ -29,100 +40,65 @@ public class AfiliadoDTO {
 		setTelefono(telefono);
 		setTipoIdentificacion (tipoIdentificacion);
 		setInstitucion(institucion);
-		setCarnet (carnet);
 	}
 
-	
-	public AfiliadoDTO() {
-		super();
-	}
 	
 	public static final AfiliadoDTO build() {
 		return new AfiliadoDTO();
 	}
 
-	public UUID getId() {
+	public final UUID getId() {
 		return id;
 	}
-
-
-	public void setId(UUID id) {
-		this.id = UUIDHelper.getDefault();
+	public final AfiliadoDTO setId(final UUID id) {
+		this.id = ObjectHelper.getObjectHelper().getDefaultValue(id,UUIDHelper.generate());
+		return this;
 	}
-
-
-	public String getNumeroIdAfiliado() {
+	public final String getNumeroIdAfiliado() {
 		return numeroIdAfiliado;
 	}
-
-
-	public void setNumeroIdAfiliado(String numeroIdAfiliado) {
-		this.numeroIdAfiliado = TextHelper.applyTrim(numeroIdAfiliado);
+	public final AfiliadoDTO setNumeroIdAfiliado(final String numeroIdAfiliado) {
+		this.numeroIdAfiliado = numeroIdAfiliado;
+		return this;
 	}
-
-
-	public String getNombre() {
+	public final String getNombre() {
 		return nombre;
 	}
-
-
-	public void setNombre(String nombre) {
-		this.nombre = TextHelper.applyTrim(nombre);
+	public final AfiliadoDTO setNombre(final String nombre) {
+		this.nombre = nombre;
+		return this;
 	}
-
-
-	public String getCorreo() {
+	public final String getCorreo() {
 		return correo;
 	}
-
-
-	public void setCorreo(String correo) {
-		this.correo = TextHelper.applyTrim(correo);
+	public final AfiliadoDTO setCorreo(final String correo) {
+		this.correo = correo;
+		return this;
 	}
-
-
-	public String getTelefono() {
+	public final String getTelefono() {
 		return telefono;
 	}
-
-
-	public void setTelefono(String telefono) {
-		this.telefono = TextHelper.applyTrim(telefono);
+	public final AfiliadoDTO setTelefono(final String telefono) {
+		this.telefono = telefono;
+		return this;
 	}
-
 
 	public TipoIdentificacionDTO getTipoIdentificacion() {
-		return tipoIdentificacion;
+		return getTipoIdentificacion();
 	}
 
 
-	public void setTipoIdentificacion(TipoIdentificacionDTO tipoIdentificacion) {
+	public final void setTipoIdentificacion(TipoIdentificacionDTO tipoIdentificacion) {
 		this.tipoIdentificacion = ObjectHelper.getObjectHelper().getDefaultValue(tipoIdentificacion,new TipoIdentificacionDTO());
 	}
 
 
 	public InstitucionDTO getInstitucion() {
-		return institucion;
+		return getInstitucion();
 	}
 
 
-	public void setInstitucion(InstitucionDTO institucion) {
+	public final void setInstitucion(InstitucionDTO institucion) {
 		this.institucion =  ObjectHelper.getObjectHelper().getDefaultValue(institucion,new InstitucionDTO());
 	}
-
-
-	public CarnetDTO getCarnet() {
-		return carnet;
-	}
-
-
-	public void setCarnet(CarnetDTO carnet) {
-		this.carnet =  ObjectHelper.getObjectHelper().getDefaultValue(carnet, new CarnetDTO());
-	}
-	
-	
-	
-	
-	
-
 }

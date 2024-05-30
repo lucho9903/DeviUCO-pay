@@ -9,6 +9,7 @@ import co.edu.uco.deviucopay.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.deviucopay.business.domain.CarnetDomain;
 import co.edu.uco.deviucopay.dto.CarnetDTO;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
 
 public class CarnetAssemblerDTO implements AssemblerDTO<CarnetDomain, CarnetDTO> {
 
@@ -22,39 +23,30 @@ public class CarnetAssemblerDTO implements AssemblerDTO<CarnetDomain, CarnetDTO>
 	public static final AssemblerDTO<CarnetDomain, CarnetDTO> getInstance(){
 		return instance;
 	}
-	@Override
-	public final CarnetDomain todomain(final CarnetDTO date) {
-		var carnetDtoTmp =getObjectHelper().getDefaultValue(date , CarnetDTO.build());
+
 	
-		return CarnetDomain.build(carnetDtoTmp.getId(),carnetDtoTmp.getNumeroCarnet());
+	@Override
+	public final CarnetDomain toDomain(final CarnetDTO data) {
+		var carnetDtoTmp=getObjectHelper().getDefaultValue(data, CarnetDTO.build());
+		return CarnetDomain.build(carnetDtoTmp.getId(), carnetDtoTmp.getNumeroCarnet());
 	}
 
 	@Override
 	public final CarnetDTO toDTO(final CarnetDomain domain) {
-		
-	var carnetDomainTmp = getObjectHelper().getDefaultValue(domain , carnetDomain.build());
-	
-		return CarnetDTO.build().setId(carnetDomainTmp.getId()).setNombre(carnetDomainTmp.getNombre());
+		var carnetDomainTmp=getObjectHelper().getDefaultValue(domain, CarnetDomain.build());
+		return CarnetDTO.build().setId(carnetDomainTmp.getId()).setNumeroCarnet(carnetDomainTmp.getNumeroCarnet());
 	}
 
 	@Override
-	public final List<CarnetDomain> toDomainCollection(final List<CarnetDTO> dtoCollection) {
-		var dtoCollectionTmp = ObjectHelper.getObjectHelper()
-				.getDefaultValue(dtoCollection, new ArrayList<CarnetDTO>());
-		var resultadoDomain = new ArrayList<CarnetDomain>();
-		
-		for (CarnetDTO carnetDto : dtoCollectionTmp) {
-			var carnetDomainTmp = toDomain(carnetDto);
-			resultadoDomain.add(carnetDomainTmp);
-		}
-		
-		return resultadoDomain;
+	public List<CarnetDomain> toDomainCollection(List<CarnetDTO> entituCollection) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public final List<CarnetDTO> toDTOCollection(final List<CarnetDomain> domainCollection) {
-		var domainCollectionTmp = ObjectHelper.getObjectHelper()
-				.getDefaultValue(domainCollection, new ArrayList<CarnetDomain>());
-		return domainCollectionTmp.stream().map(this::toDTO).toList();
+	public List<CarnetDTO> toDTOCollection(List<CarnetDomain> domainCollection) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }
