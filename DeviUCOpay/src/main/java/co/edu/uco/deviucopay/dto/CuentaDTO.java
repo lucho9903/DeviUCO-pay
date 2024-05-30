@@ -1,75 +1,92 @@
 package co.edu.uco.deviucopay.dto;
 
+import java.util.UUID;
+
+import co.edu.uco.deviucopay.crosscutting.helpers.FloatHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
 
 public class CuentaDTO {
-	
+	private UUID id;
 	private String numeroCuenta;
-	private String contraseña;
+	private String pin;
 	private Float saldo;
 	private AfiliadoDTO afiliado;
 	private TipoCuentaDTO tipoCuenta;
-	
-	public CuentaDTO(String numeroCuenta, String contraseña, Float saldo, AfiliadoDTO afiliado,TipoCuentaDTO tipoCuenta) {
-		super();
-		setNumeroCuenta(numeroCuenta);
-		setContraseña(contraseña);
-		setSaldo(saldo);
-		setAfiliado(afiliado);
-		setTipoCuenta(tipoCuenta);
-	}
+	private CarnetDTO carnet;
 	
 	public CuentaDTO() {
 		super();
+		setId(UUIDHelper.getDefault());
+		setNumeroCuenta(TextHelper.EMPTY);
+		setPin(TextHelper.EMPTY);
+		setSaldo(FloatHelper.ZERO);
+		setAfiliado(AfiliadoDTO.build());
+		setTipoCuenta(TipoCuentaDTO.build());
+		setCarnet(CarnetDTO.build());
+	}	
+	public CuentaDTO(UUID id, String numeroCuenta, String pin, Float saldo, AfiliadoDTO afiliado,TipoCuentaDTO tipoCuenta, CarnetDTO carnet) {
+		super();
+		setId(id);
+		setNumeroCuenta(numeroCuenta);
+		setPin(pin);
+		setSaldo(saldo);
+		setAfiliado(afiliado);
+		setTipoCuenta(tipoCuenta);
+		setCarnet(carnet);
 	}
 	public static final CuentaDTO build() {
-		
 		return new CuentaDTO();
-		
 	}
-
-	public String getNumeroCuenta() {
+	
+	public final UUID getId() {
+		return id;
+	}
+	public final CuentaDTO setId(final UUID id) {
+		this.id = ObjectHelper.getObjectHelper().getDefaultValue(id,UUIDHelper.generate());
+		return this;
+	}
+	public final String getNumeroCuenta() {
 		return numeroCuenta;
 	}
-
-	public void setNumeroCuenta(String numeroCuenta) {
-		this.numeroCuenta = TextHelper.applyTrim(numeroCuenta);
+	public final CuentaDTO setNumeroCuenta(final String numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+		return this;
 	}
-
-	public String getContraseña() {
-		return contraseña;
+	public final String getPin() {
+		return pin;
 	}
-
-	public void setContraseña(String contraseña) {
-		this.contraseña = TextHelper.applyTrim(contraseña);
+	public final CuentaDTO setPin(final String pin) {
+		this.pin = pin;
+		return this;
 	}
-
-	public Float getSaldo() {
+	public final Float getSaldo() {
 		return saldo;
 	}
-
-	public void setSaldo(Float saldo) {
+	public final CuentaDTO setSaldo(final Float saldo) {
 		this.saldo = saldo;
+		return this;
 	}
-
-	public AfiliadoDTO getAfiliado() {
+	public final AfiliadoDTO getAfiliado() {
 		return afiliado;
 	}
-
-	public void setAfiliado(AfiliadoDTO afiliado) {
-		this.afiliado = ObjectHelper.getObjectHelper().getDefaultValue(afiliado,new AfiliadoDTO());
+	public final CuentaDTO setAfiliado(final AfiliadoDTO afiliado) {
+		this.afiliado = afiliado;
+		return this;
 	}
-
-	public TipoCuentaDTO getTipoCuenta() {
+	public final TipoCuentaDTO getTipoCuenta() {
 		return tipoCuenta;
 	}
-
-	public void setTipoCuenta(TipoCuentaDTO tipoCuenta) {
-		this.tipoCuenta = ObjectHelper.getObjectHelper().getDefaultValue(tipoCuenta, new TipoCuentaDTO());
+	public final CuentaDTO setTipoCuenta(final TipoCuentaDTO tipoCuenta) {
+		this.tipoCuenta = tipoCuenta;
+		return this;
 	}
-	
-	
-
-	
+	public final CarnetDTO getCarnet() {
+		return carnet;
+	}
+	public final CuentaDTO setCarnet(final CarnetDTO carnet) {
+		this.carnet = carnet;
+		return this;
+	}
 }

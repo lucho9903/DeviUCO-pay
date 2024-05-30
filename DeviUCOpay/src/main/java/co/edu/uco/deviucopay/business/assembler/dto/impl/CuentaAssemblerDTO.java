@@ -1,9 +1,9 @@
 package co.edu.uco.deviucopay.business.assembler.dto.impl;
 
-import static co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper.getObjectHelper;
-import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import java.util.List;
 import java.util.ArrayList;
+import static co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper.getObjectHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.deviucopay.business.domain.CuentaDomain;
 import co.edu.uco.deviucopay.dto.CuentaDTO;
@@ -21,18 +21,18 @@ public class CuentaAssemblerDTO implements AssemblerDTO<CuentaDomain, CuentaDTO>
 		return instance;
 	}
 	@Override
-	public final CuentaDomain todomain(final CuentaDTO date) {
-		var cuentaDtoTmp =getObjectHelper().getDefaultValue(date , CuentaDTO.build());
-	
-		return CuentaDomain.build(cuentaDtoTmp.getNumeroCuenta(),cuentaDtoTmp.getContraseña(), cuentaDtoTmp.getSaldo(), cuentaDtoTmp.getAfiliado(), cuentaDtoTmp.getTipoCuenta());
+	public CuentaDomain toDomain(CuentaDTO data) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
 
 	@Override
 	public final CuentaDTO toDTO(final CuentaDomain domain) {
 		
-	var cuentaDomainTmp = getObjectHelper().getDefaultValue(domain , CuentaDomain.build());
-	
-		return CuentaDTO.build().setId(cuentaDomainTmp.get()).setNombre(cuentaDomainTmp.getNombre());
+		var cuentaDomainTmp = getObjectHelper().getDefaultValue(domain , CuentaDomain.build());
+		
+		return CuentaDTO.build().setId(cuentaDomainTmp.getId()).setNumeroCuenta(cuentaDomainTmp.getNumeroCuenta());
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class CuentaAssemblerDTO implements AssemblerDTO<CuentaDomain, CuentaDTO>
 		var resultadoDomain = new ArrayList<CuentaDomain>();
 		
 		for (CuentaDTO cuentaDto : dtoCollectionTmp) {
-			var cuentaDomainTmp = todomain(cuentaDto);
+			var cuentaDomainTmp = toDomain(cuentaDto);
 			resultadoDomain.add(cuentaDomainTmp);
 		}
 		
@@ -55,4 +55,6 @@ public class CuentaAssemblerDTO implements AssemblerDTO<CuentaDomain, CuentaDTO>
 				.getDefaultValue(domainCollection, new ArrayList<CuentaDomain>());
 		return domainCollectionTmp.stream().map(this::toDTO).toList();
 	}
+
+	
 }

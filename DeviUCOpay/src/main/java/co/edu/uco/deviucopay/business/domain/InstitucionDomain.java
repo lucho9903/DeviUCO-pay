@@ -10,26 +10,28 @@ import co.edu.uco.deviucopay.business.domain.TipoInstitucionDomain;
 public class InstitucionDomain {
     private UUID id;
     private String nombre;
-    private TipoInstitucionDomain tipoInstitucion;
     private String correo;
+    private TipoInstitucionDomain tipoInstitucion;
+    
 
-    private InstitucionDomain(final UUID id, final String nombre, final TipoInstitucionDomain tipoInstitucion, final String correo) {
+    private InstitucionDomain(final UUID id, final String nombre, final String correo, final TipoInstitucionDomain tipoInstitucion) {
         setId(id);
         setNombre(nombre);
-        setTipoInstitucion(tipoInstitucion);
         setCorreo(correo);
+        setTipoInstitucion(tipoInstitucion);
+        
     }
 
-    public static InstitucionDomain build(final UUID id, final String nombre, final TipoInstitucionDTO tipoInstitucionDTO, final String correo) {
-        return new InstitucionDomain(id, nombre, tipoInstitucionDTO, correo);
+    public final  static InstitucionDomain build(final UUID id, final String nombre,final String correo, final TipoInstitucionDomain tipoInstitucionDTO) {
+        return new InstitucionDomain(id, nombre, correo, tipoInstitucionDTO);
     }
 
-    public static InstitucionDomain build(final UUID id) {
-        return new InstitucionDomain(id, TextHelper.EMPTY, TipoInstitucionDomain.build(), TextHelper.EMPTY);
+    public final  static InstitucionDomain build(final UUID id) {
+        return new InstitucionDomain(id, TextHelper.EMPTY, TextHelper.EMPTY, TipoInstitucionDomain.build());
     }
 
-    public static InstitucionDomain build() {
-        return new InstitucionDomain(UUIDHelper.getDefault(), TextHelper.EMPTY, TipoInstitucionDomain.build(), TextHelper.EMPTY);
+    public final static InstitucionDomain build() {
+        return new InstitucionDomain(UUIDHelper.getDefault(), TextHelper.EMPTY, TextHelper.EMPTY, TipoInstitucionDomain.build());
     }
 
     private final void setId(UUID id) {

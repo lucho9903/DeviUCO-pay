@@ -1,6 +1,6 @@
 package co.edu.uco.deviucopay.entity;
 
-import co.edu.uco.deviucopay.crosscutting.helpers.LongHelper;
+import co.edu.uco.deviucopay.crosscutting.helpers.FloatHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 

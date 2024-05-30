@@ -2,6 +2,7 @@ package co.edu.uco.deviucopay.dto;
 
 import java.util.UUID;
 
+import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.UUIDHelper;
 
@@ -18,29 +19,26 @@ public class CarnetDTO {
 
 	public CarnetDTO() {
 		super();
-	}
+		setId(UUIDHelper.getDefault());
+		setNumeroCarnet(TextHelper.EMPTY);
+}
 	
-	public static CarnetDTO build() {
+	public static final CarnetDTO build() {
 		return new CarnetDTO();
-		
 	}
 	
-	public UUID getId() {
+	public final UUID getId() {
 		return id;
 	}
-	
-	public void setId(UUID id) {
-		this.id = UUIDHelper.getDefault();
+	public final CarnetDTO setId( final UUID id) {
+		this.id = ObjectHelper.getObjectHelper().getDefaultValue(id,UUIDHelper.generate());
+		return this;
 	}
-	
-	public String getNumeroCarnet() {
+	public final String getNumeroCarnet() {
 		return numeroCarnet;
 	}
-	
-	public void setNumeroCarnet(String numeroCarnet) {
-		this.numeroCarnet = TextHelper.applyTrim(numeroCarnet);
-	}
-	
-	
-
+	public final CarnetDTO setNumeroCarnet(final String numeroCarnet) {
+		this.numeroCarnet=TextHelper.applyTrim(numeroCarnet);
+		return this;
+	}	
 }

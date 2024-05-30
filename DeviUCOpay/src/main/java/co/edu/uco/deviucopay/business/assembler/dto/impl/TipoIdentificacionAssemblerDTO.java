@@ -7,8 +7,10 @@ import java.util.List;
 import co.edu.uco.deviucopay.business.assembler.dto.AssemblerDTO;
 import co.edu.uco.deviucopay.business.domain.TipoCuentaDomain;
 import co.edu.uco.deviucopay.business.domain.TipoIdentificacionDomain;
+import co.edu.uco.deviucopay.business.domain.TipoInstitucionDomain;
 import co.edu.uco.deviucopay.dto.TipoCuentaDTO;
 import co.edu.uco.deviucopay.dto.TipoIdentificacionDTO;
+import co.edu.uco.deviucopay.dto.TipoInstitucionDTO;
 
 public class TipoIdentificacionAssemblerDTO implements AssemblerDTO<TipoIdentificacionDomain, TipoIdentificacionDTO> {
 
@@ -23,29 +25,29 @@ public class TipoIdentificacionAssemblerDTO implements AssemblerDTO<TipoIdentifi
 		return instance;
 	}
 	@Override
-	public final TipoIdentificacionDomain todomain(final TipoIdentificacionDTO date) {
+	public final TipoIdentificacionDomain toDomain(final TipoIdentificacionDTO date) {
 		var tipoIdentificacionDtoTmp =getObjectHelper().getDefaultValue(date , TipoIdentificacionDTO.build());
-	
+		
 		return TipoIdentificacionDomain.build(tipoIdentificacionDtoTmp.getId(),tipoIdentificacionDtoTmp.getNombre());
 	}
 
 	@Override
 	public final TipoIdentificacionDTO toDTO(final TipoIdentificacionDomain domain) {
-		
-	var tipoIdentificacionDomainTmp = getObjectHelper().getDefaultValue(domain , TipoCuentaDomain.build());
+		var tipoIdentificacionDomainTmp = getObjectHelper().getDefaultValue(domain , TipoIdentificacionDomain.build());
 	
-		return TipoCuentaDTO.build().setId(tipoIdentificacionDomainTmp.getId()).setNombre(tipoIdentificacionDomainTmp.getNombre()).set;
+		return TipoIdentificacionDTO.build().setId(tipoIdentificacionDomainTmp.getId()).setNombre(tipoIdentificacionDomainTmp.getNombre());
 	}
 
 	@Override
-	public List<TipoIdentificacionDomain> toDomainCollection(List<TipoIdentificacionDTO> entituCollection) {
-		// TODO Auto-generated method stub
+	public final List<TipoIdentificacionDomain> toDomainCollection(final List<TipoIdentificacionDTO> dtoCollection) {
+		
+		
 		return null;
 	}
-
 	@Override
-	public List<TipoIdentificacionDTO> toDTOCollection(List<TipoIdentificacionDomain> domainCollection) {
-		// TODO Auto-generated method stub
+	public final List<TipoIdentificacionDTO> toDTOCollection(final List<TipoIdentificacionDomain> domainCollection) {
+		
 		return null;
 	}
+	
 }
