@@ -9,9 +9,10 @@ import java.util.UUID;
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.CarnetDAO;
 import co.edu.uco.deviucopay.entity.CarnetEntity;
-import co.edu.uco.deviucopay.entity.CarnetEntity;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.*;
 
-public class CarnetAzureSqlDAO implements CarnetDAO {
+
+public class CarnetAzureSqlDAO extends SqlConnection implements CarnetDAO {
 
 	@Override
 	public final List<CarnetEntity> consultar(final CarnetEntity data) {
