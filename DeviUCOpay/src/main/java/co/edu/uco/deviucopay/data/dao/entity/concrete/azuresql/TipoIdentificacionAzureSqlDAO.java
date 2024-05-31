@@ -10,31 +10,31 @@ import java.util.UUID;
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.TipoIdentificacionDAO;
 import co.edu.uco.deviucopay.entity.TipoIdentificacionEntity;
-import co.edu.uco.deviucopay.data.dao.entity.concrete.SqlConnection;
 
-public class TipoIdentificacionAzureSqlDAO implements TipoIdentificacionDAO{
+public class TipoIdentificacionAzureSqlDAO implements TipoIdentificacionDAO {
 
-	@Override
-	public final List<TipoIdentificacionEntity> consultar(final TipoIdentificacionEntity data) {
+    private Connection connection;
+
+    public TipoIdentificacionAzureSqlDAO(Connection connection) {
+        this.connection = connection;
+    }
+
+    @Override
+    public List<TipoIdentificacionEntity> consultar(final TipoIdentificacionEntity data) {
+    
         final List<TipoIdentificacionEntity> tipoIdentificaciones = new ArrayList<>();
-        String sentenciasSql =
-                "SELECT id, nombre" +
-                "FROM tipoinstitucion ";
+        String sentenciaSql = "SELECT id, nombre FROM tipoinstitucion WHERE 1 = 1";
 
         if (data != null) {
-            boolean whereAdded = false;
             if (data.getId() != null) {
-                sentenciasSql += "WHERE id = ? ";
-                whereAdded = true;
+                sentenciaSql += " AND id = :id";
             }
             if (data.getNombre() != null && !data.getNombre().isEmpty()) {
-                sentenciasSql += (whereAdded ? "AND " : "WHERE ") + "nombre LIKE ? ";
-                whereAdded = true;
+                sentenciaSql += " AND nombre LIKE :nombre";
             }
-    
         }
 
-        try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciasSql)) {
+        try (PreparedStatement sentenciaSqlPreparada = connection.prepareStatement(sentenciaSql)) {
 
             int index = 1;
             if (data != null) {
@@ -44,16 +44,15 @@ public class TipoIdentificacionAzureSqlDAO implements TipoIdentificacionDAO{
                 if (data.getNombre() != null && !data.getNombre().isEmpty()) {
                     sentenciaSqlPreparada.setString(index++, "%" + data.getNombre() + "%");
                 }
-               
             }
 
             try (var resultado = sentenciaSqlPreparada.executeQuery()) {
                 while (resultado.next()) {
-                    TipoIdentificacionEntity tipoInstitucion = new TipoIdentificacionEntity();
-                    tipoInstitucion.setId((UUID) resultado.getObject("id"));
-                    tipoInstitucion.setNombre(resultado.getString("nombre"));
+                    TipoIdentificacionEntity tipoIdentificacion = new TipoIdentificacionEntity();
+                    tipoIdentificacion.setId((UUID) resultado.getObject("id"));
+                    tipoIdentificacion.setNombre(resultado.getString("nombre"));
 
-                    tipoIdentificaciones.add(tipoInstitucion);
+                    tipoIdentificaciones.add(tipoIdentificacion);
                 }
             }
 
@@ -71,5 +70,4 @@ public class TipoIdentificacionAzureSqlDAO implements TipoIdentificacionDAO{
 
         return tipoIdentificaciones;
     }
-
 }

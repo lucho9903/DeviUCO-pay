@@ -1,24 +1,32 @@
 package co.edu.uco.deviucopay.entity;
 
-import co.edu.uco.deviucopay.crosscutting.helpers.FloatHelper;
+import java.util.UUID;
 import co.edu.uco.deviucopay.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.deviucopay.crosscutting.helpers.TextHelper;
 
 public class CuentaEntity {
-	
+	private UUID id;
 	private String numeroCuenta;
 	private String contraseña;
 	private Float saldo;
 	private AfiliadoEntity afiliado;
 	private TipoCuentaEntity tipoCuenta;
 	
-	public CuentaEntity(String numeroCuenta, String contraseña, Float saldo, AfiliadoEntity afiliado,TipoCuentaEntity tipoCuenta) {
-		
-		setNumeroCuenta(numeroCuenta);;
+	public CuentaEntity(UUID id, String numeroCuenta, String contraseña, Float saldo, AfiliadoEntity afiliado,TipoCuentaEntity tipoCuenta) {
+		setId(id);
+		setNumeroCuenta(numeroCuenta);
 		setContraseña(contraseña);
 		setSaldo(saldo);
 		setAfiliado(afiliado);
 		setTipoCuenta(tipoCuenta);
+	}
+	public final UUID getId() {
+		return id;
+	}
+
+	public final CuentaEntity setId(final UUID id) {
+		this.id = id;
+		return this;
 	}
 
 	public String getNumeroCuenta() {
