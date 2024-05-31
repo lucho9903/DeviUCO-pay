@@ -1,11 +1,11 @@
 package co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.AfiliadoDAO;
 import co.edu.uco.deviucopay.data.dao.entity.TipoIdentificacionDAO;
@@ -14,7 +14,14 @@ import co.edu.uco.deviucopay.entity.AfiliadoEntity;
 import co.edu.uco.deviucopay.entity.TipoIdentificacionEntity;
 
 public class AfiliadoAzureSqlDAO extends SqlConnection implements AfiliadoDAO {
-
+	private final TipoIdentificacionDAO tipoIdentificacionDAO;
+	
+	private AfiliadoAzureSqlDAO(final Connection connection, final TipoIdentificacionDAO tipoIdentificacionDAO) {
+		super(connection);
+		this.tipoIdentificacionDAO = tipoIdentificacionDAO;
+	}
+	
+	
 	@Override
 	public final List<AfiliadoEntity> consultar(final AfiliadoEntity data) {
         final List<AfiliadoEntity> afiliados = new ArrayList<>();
@@ -76,19 +83,19 @@ public class AfiliadoAzureSqlDAO extends SqlConnection implements AfiliadoDAO {
 
             try (var resultado = sentenciaSqlPreparada.executeQuery()) {
                 while (resultado.next()) {
-                    AfiliadoEntity tipoInstitucion = new AfiliadoEntity();
-                    tipoInstitucion.setId((UUID) resultado.getObject("id"));
-                    tipoInstitucion.setNombre(resultado.getString("nombre"));
-                    tipoInstitucion.setNumeroIdAfiliado(resultado.getString("numero_afiliado"));
-                    tipoInstitucion.setTelefono(resultado.getString("telefono"));
-                    tipoInstitucion.setCorreo(resultado.getString("correo"));
+                    AfiliadoEntity afiliado = new AfiliadoEntity();
+                    afiliado.setId((UUID) resultado.getObject("id"));
+                    afiliado.setNombre(resultado.getString("nombre"));
+                    afiliado.setNumeroIdAfiliado(resultado.getString("numero_afiliado"));
+                    afiliado.setTelefono(resultado.getString("telefono"));
+                    afiliado.setCorreo(resultado.getString("correo"));
                     
                     UUID tipoIdentificacionId = (UUID) resultado.getObject("tipo_identificacion");
-                    TipoIdentificacionEntity tipoIdentificacion = TipoIdentificacionDAO.obtenerPorId(tipoIdentificacionId); 
-                    tipoInstitucion.setTipoIdentificacion(tipoIdentificacion);
+                    TipoIdentificacionEntity tipoIdentificacion = tipoIdentificacionDAO.obtenerPorId(tipoIdentificacionId);
+                    afiliado.setTipoIdentificacion(tipoIdentificacion);
+;
 
-
-                    afiliados.add(tipoInstitucion);
+                    afiliados.add(afiliado);
                 }
             }
 
