@@ -1,11 +1,11 @@
 package co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql;
 
 import java.sql.PreparedStatement;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.CarnetDAO;
 import co.edu.uco.deviucopay.entity.CarnetEntity;
@@ -13,6 +13,11 @@ import co.edu.uco.deviucopay.data.dao.entity.concrete.*;
 
 
 public class CarnetAzureSqlDAO extends SqlConnection implements CarnetDAO {
+	
+	public CarnetAzureSqlDAO(final Connection connection) {
+		super(connection);
+		
+	}
 
 	@Override
 	public final List<CarnetEntity> consultar(final CarnetEntity data) {

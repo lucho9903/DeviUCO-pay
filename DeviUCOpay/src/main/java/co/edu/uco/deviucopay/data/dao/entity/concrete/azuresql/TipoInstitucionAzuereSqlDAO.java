@@ -5,13 +5,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+import java.sql.Connection;
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.TipoInstitucionDAO;
 import co.edu.uco.deviucopay.data.dao.entity.concrete.SqlConnection;
 import co.edu.uco.deviucopay.entity.TipoInstitucionEntity;
 
 public class TipoInstitucionAzuereSqlDAO extends SqlConnection implements TipoInstitucionDAO {
+
+	public TipoInstitucionAzuereSqlDAO(final Connection connection) {
+		super(connection);
+		
+	}
 
 	@Override
     public final List<TipoInstitucionEntity> consultar(final TipoInstitucionEntity data) {
