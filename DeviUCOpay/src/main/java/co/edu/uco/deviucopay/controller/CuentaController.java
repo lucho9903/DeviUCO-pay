@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import co.edu.uco.deviucopay.business.facade.impl.cuenta.ConsultarCuentaFacade;
 import co.edu.uco.deviucopay.business.facade.impl.cuenta.RegistrarCuentaFacade;
 import co.edu.uco.deviucopay.crosscutting.exceptions.DeviUcopayException;

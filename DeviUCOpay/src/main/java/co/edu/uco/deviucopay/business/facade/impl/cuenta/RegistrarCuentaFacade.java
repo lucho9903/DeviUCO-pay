@@ -24,7 +24,7 @@ public class RegistrarCuentaFacade implements FacadeWithoutReturn<CuentaDTO>{
 		daoFactory.iniciarTransaccion();
 		try {
 			var useCase= new RegistrarCuenta(daoFactory);
-			var cuentaDomain = CuentaAssemblerDTO.getInstance().todomain(dto);
+			var cuentaDomain = CuentaAssemblerDTO.getInstance().toDomain(dto);
 			
 			useCase.execute(cuentaDomain);
 			
@@ -41,7 +41,7 @@ public class RegistrarCuentaFacade implements FacadeWithoutReturn<CuentaDTO>{
 		}finally {
 			daoFactory.cerrarConexion();
 		}
-		// TODO Auto-generated method stub
+		
 		
 	}
 

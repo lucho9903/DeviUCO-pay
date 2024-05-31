@@ -7,6 +7,7 @@ import co.edu.uco.deviucopay.data.dao.entity.TipoCuentaDAO;
 import co.edu.uco.deviucopay.data.dao.entity.TipoIdentificacionDAO;
 import co.edu.uco.deviucopay.data.dao.entity.TipoInstitucionDAO;
 import co.edu.uco.deviucopay.data.dao.entity.InstitucionDAO;
+import co.edu.uco.deviucopay.data.dao.factory.concrete.AzureSQLDAOFactory;
 
 
 

@@ -2,6 +2,7 @@ package co.edu.uco.deviucopay.business.usecase.impl.cuenta;
 
 import java.util.UUID;
 
+import co.edu.uco.deviucopay.business.assembler.entity.impl.CarnetAssemblerEntity;
 import co.edu.uco.deviucopay.business.domain.CuentaDomain;
 import co.edu.uco.deviucopay.business.usecase.UseCaseWithoutReturn;
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.BusinessDeviUcopayException;
@@ -26,10 +27,16 @@ public class RegistrarCuenta implements UseCaseWithoutReturn<CuentaDomain> {
 
 	@Override
 	public void execute(CuentaDomain data) {
-		//logica de datos 
-		//validacion de cunetas repetidas
 		
-		
+		validarCuentaMismoNumeroMismoCarnet(data.getNumeroCuenta(), data.getCarnet().getId());
+
+        
+        var ciudadEntity = CuentaEntity.build().setId(generarIdentificadorCuenta()).
+        		setNumeroCuenta(data.getNumeroCuenta()).setCarnet(CarnetAssemblerEntity.
+        				getInstance().toEntity(data.getCarnet()));
+        
+
+        factory.getCarnetDAO().crear(ciudadEntity);	
 	}
 	private final UUID generarIdentificadorCuenta() {
 		UUID id = UUIDHelper.generate();

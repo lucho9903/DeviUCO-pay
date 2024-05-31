@@ -72,4 +72,6 @@ public class CarnetAzureSqlDAO extends SqlConnection implements CarnetDAO {
         return Carnets;
     }
 
+	
+
 }
