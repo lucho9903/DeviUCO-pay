@@ -16,7 +16,9 @@ import co.edu.uco.deviucopay.entity.TipoIdentificacionEntity;
 public class AfiliadoAzureSqlDAO extends SqlConnection implements AfiliadoDAO {
 	private final TipoIdentificacionDAO tipoIdentificacionDAO;
 	
-	private AfiliadoAzureSqlDAO(final Connection connection, final TipoIdentificacionDAO tipoIdentificacionDAO) {
+	
+	
+	public AfiliadoAzureSqlDAO(final Connection connection, final TipoIdentificacionDAO tipoIdentificacionDAO) {
 		super(connection);
 		this.tipoIdentificacionDAO = tipoIdentificacionDAO;
 	}

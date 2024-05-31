@@ -1,6 +1,7 @@
 package co.edu.uco.deviucopay.data.dao.factory.concrete;
 
 import java.sql.DriverManager;
+
 import java.sql.SQLException;
 
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
@@ -15,7 +16,14 @@ import co.edu.uco.deviucopay.data.dao.entity.TipoCuentaDAO;
 import co.edu.uco.deviucopay.data.dao.entity.TipoIdentificacionDAO;
 import co.edu.uco.deviucopay.data.dao.entity.TipoInstitucionDAO;
 import co.edu.uco.deviucopay.data.dao.entity.concrete.SqlConnection;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql.AfiliadoAzureSqlDAO;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql.CarnetAzureSqlDAO;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql.InstitucionAzuereSqlDAO;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql.TipoCuentaAzureSqlDAO;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql.TipoIdentificacionAzureSqlDAO;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql.TipoInstitucionAzuereSqlDAO;
 import co.edu.uco.deviucopay.data.dao.factory.DAOFactory;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.azuresql.CuentaAzureSqlDAO;
 
 public final class AzureSQLDAOFactory extends SqlConnection implements DAOFactory {
 
@@ -64,43 +72,38 @@ public final class AzureSQLDAOFactory extends SqlConnection implements DAOFactor
 	@Override
 	public CuentaDAO getCuentaDAO() {
 		// TODO Auto-generated method stub
-		return null;
+		return new CuentaAzureSqlDAO(getConexion(),getTipoCuentaDAO());
 	}
 
 	@Override
 	public CarnetDAO getCarnetDAO() {
 		// TODO Auto-generated method stub
-		return null;
+		return new CarnetAzureSqlDAO(getConexion());
 	}
 
 	@Override
 	public AfiliadoDAO getAfiliadoDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new AfiliadoAzureSqlDAO(getConexion(),getTipoIdentificacionDAO());
 	}
 
 	@Override
 	public InstitucionDAO getInstitucionDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new InstitucionAzuereSqlDAO(getConexion());
 	}
 
 	@Override
 	public TipoCuentaDAO getTipoCuentaDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoCuentaAzureSqlDAO(getConexion());
 	}
 
 	@Override
 	public TipoIdentificacionDAO getTipoIdentificacionDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoIdentificacionAzureSqlDAO(getConexion());
 	}
 
 	@Override
 	public TipoInstitucionDAO getTipoInstitucionDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoInstitucionAzuereSqlDAO(getConexion());
 	}
 	
 }
