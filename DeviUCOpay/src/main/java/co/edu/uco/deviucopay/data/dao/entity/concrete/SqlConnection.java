@@ -2,7 +2,6 @@ package co.edu.uco.deviucopay.data.dao.entity.concrete;
 
 
 import java.sql.Connection;
-
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.crosscutting.exceptions.messageCatalog.MessageCatalogStrategy;
 import co.edu.uco.deviucopay.crosscutting.exceptions.messageCatalog.data.CodigoMensaje;
