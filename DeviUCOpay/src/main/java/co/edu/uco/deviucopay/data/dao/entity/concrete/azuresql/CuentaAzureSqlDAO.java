@@ -9,11 +9,20 @@ import java.util.UUID;
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.AfiliadoDAO;
 import co.edu.uco.deviucopay.data.dao.entity.CuentaDAO;
+import co.edu.uco.deviucopay.data.dao.entity.TipoCuentaDAO;
+import co.edu.uco.deviucopay.data.dao.entity.TipoIdentificacionDAO;
 import co.edu.uco.deviucopay.data.dao.entity.concrete.SqlConnection;
 import co.edu.uco.deviucopay.entity.AfiliadoEntity;
 import co.edu.uco.deviucopay.entity.CuentaEntity;
+import co.edu.uco.deviucopay.entity.TipoCuentaEntity;
 
 public class CuentaAzureSqlDAO extends SqlConnection implements CuentaDAO{
+	private final TipoCuentaDAO tipoCuentaDAO;
+	
+	public CuentaAzureSqlDAO(final Connection connection, final TipoCuentaDAO tipoCuentaDAO) {
+		super(connection);
+		this.tipoCuentaDAO = tipoCuentaDAO;
+	}
 
 	@Override
 	public final void crear(final CuentaEntity data) {
@@ -45,33 +54,6 @@ public class CuentaAzureSqlDAO extends SqlConnection implements CuentaDAO{
             throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
         }
     }
-	
-
-	@Override
-	public final void eliminar (final UUID id) {
-		 final StringBuilder sentenciasSql = new StringBuilder();
-
-	     sentenciasSql.append("DELETE FROM cuenta ");
-	     sentenciasSql.append("WHERE id = ?");
-
-	        try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciasSql.toString())) {
-
-	            sentenciaSqlPreparada.setObject(1, id);
-
-	            sentenciaSqlPreparada.executeUpdate();
-
-	        } catch (final SQLException exception) {
-	            var mensajeUsuario = "Se ha presentado un problema tratando de eliminar la cuenta con ID  por favor intente de nuevo y si el problema persiste contacte al administrador...";
-	            var mensajeTecnico = "Se ha presentado una excepción de tipo SQLException tratando de realizar el DELETE de la cuenta con ID  para más detalles revise la excepción raíz presentada..";
-
-	            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
-	        } catch (final Exception exception) {
-	            var mensajeUsuario = "Se ha presentado un problema tratando de eliminar la cuenta con ID por favor intente de nuevo y si el problema persiste contacte al administrador...";
-	            var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar el DELETE de la cuenta con ID  para más detalles revise la excepción raíz presentada..";
-
-	            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
-	        }
-	    }
 
 	@Override
 	public void modificar(CuentaEntity data) {
@@ -144,10 +126,10 @@ public class CuentaAzureSqlDAO extends SqlConnection implements CuentaDAO{
                     cuenta.setId((UUID) resultado.getObject("id"));
                     cuenta.setNumeroCuenta(resultado.getString("numero_cuenta"));
 
-                    UUID afiliadoId = (UUID) resultado.getObject("afiliado");
-                    AfiliadoEntity departamento = AfiliadoDAO.obtenerPorId(afiliadoId); 
+                    UUID tipoCuentaId = (UUID) resultado.getObject("tipo_cuenta");
+                    TipoCuentaEntity tipoCuenta = tipoCuentaDAO.obtenerPorID(tipoCuentaId);
 
-                    cuenta.setAfiliado(afiliadoId);
+                    cuenta.setTipoCuenta(tipoCuenta);
 
                     cuentas.add(cuenta);
                 }
@@ -167,5 +149,32 @@ public class CuentaAzureSqlDAO extends SqlConnection implements CuentaDAO{
 
         return cuentas;
     }
+
+	@Override
+	public void eliminar (final UUID id) {
+		 final StringBuilder sentenciasSql = new StringBuilder();
+
+	     sentenciasSql.append("DELETE FROM cuenta ");
+	     sentenciasSql.append("WHERE id = ?");
+
+	        try (final PreparedStatement sentenciaSqlPreparada = getConexion().prepareStatement(sentenciasSql.toString())) {
+
+	            sentenciaSqlPreparada.setObject(1, id);
+
+	            sentenciaSqlPreparada.executeUpdate();
+
+	        } catch (final SQLException exception) {
+	            var mensajeUsuario = "Se ha presentado un problema tratando de eliminar la cuenta con ID  por favor intente de nuevo y si el problema persiste contacte al administrador...";
+	            var mensajeTecnico = "Se ha presentado una excepción de tipo SQLException tratando de realizar el DELETE de la cuenta con ID  para más detalles revise la excepción raíz presentada..";
+
+	            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+	        } catch (final Exception exception) {
+	            var mensajeUsuario = "Se ha presentado un problema tratando de eliminar la cuenta con ID por favor intente de nuevo y si el problema persiste contacte al administrador...";
+	            var mensajeTecnico = "Se ha presentado un problema INESPERADO con una excepción de tipo Exception tratando de realizar el DELETE de la cuenta con ID  para más detalles revise la excepción raíz presentada..";
+
+	            throw new DataDeviUcopayException(mensajeTecnico, mensajeUsuario, exception);
+	        }
+	    }
+
 
 }

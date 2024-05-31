@@ -9,9 +9,10 @@ import java.util.UUID;
 
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.DataDeviUcopayException;
 import co.edu.uco.deviucopay.data.dao.entity.TipoIdentificacionDAO;
+import co.edu.uco.deviucopay.data.dao.entity.concrete.SqlConnection;
 import co.edu.uco.deviucopay.entity.TipoIdentificacionEntity;
 
-public class TipoIdentificacionAzureSqlDAO implements TipoIdentificacionDAO {
+public class TipoIdentificacionAzureSqlDAO extends SqlConnection implements TipoIdentificacionDAO {
 
     private Connection connection;
 
@@ -70,4 +71,12 @@ public class TipoIdentificacionAzureSqlDAO implements TipoIdentificacionDAO {
 
         return tipoIdentificaciones;
     }
+
+	@Override
+	public TipoIdentificacionEntity obtenerPorId(UUID id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

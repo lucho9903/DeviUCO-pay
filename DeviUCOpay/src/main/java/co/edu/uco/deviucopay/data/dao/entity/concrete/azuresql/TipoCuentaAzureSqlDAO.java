@@ -86,4 +86,10 @@ public class TipoCuentaAzureSqlDAO implements TipoCuentaDAO {
 
         return tipoCuentas;
     }
+
+	@Override
+	public TipoCuentaEntity obtenerPorID(UUID id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
