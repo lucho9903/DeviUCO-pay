@@ -14,6 +14,7 @@ public class CuentaEntity {
 	private Float saldo;
 	private AfiliadoEntity afiliado;
 	private TipoCuentaEntity tipoCuenta;
+	private CarnetEntity carnet;
 	
 	
 	public CuentaEntity() {
@@ -23,15 +24,23 @@ public class CuentaEntity {
 		setSaldo(FloatHelper.ZERO);
 		setAfiliado(AfiliadoEntity.build());
 		setTipoCuenta(TipoCuentaEntity.build());
+		setCarnet(CarnetEntity.build());
 	}
 	
-	public CuentaEntity(UUID id, String numeroCuenta, String contraseña, Float saldo, AfiliadoEntity afiliado,TipoCuentaEntity tipoCuenta) {
+	public CuentaEntity(UUID id, String numeroCuenta, String contraseña,
+			Float saldo, AfiliadoEntity afiliado,
+			TipoCuentaEntity tipoCuenta, CarnetEntity carnet) {
 		setId(id);
 		setNumeroCuenta(numeroCuenta);
 		setContraseña(contraseña);
 		setSaldo(saldo);
 		setAfiliado(afiliado);
 		setTipoCuenta(tipoCuenta);
+		setCarnet(carnet);
+	}
+	
+	public static final CuentaEntity build() {
+		return new CuentaEntity();
 	}
 	public final UUID getId() {
 		return id;
@@ -80,6 +89,13 @@ public class CuentaEntity {
 
 	public void setTipoCuenta(TipoCuentaEntity tipoCuenta) {
 		this.tipoCuenta = ObjectHelper.getObjectHelper().getDefaultValue(tipoCuenta, new TipoCuentaEntity());
+	}
+	public CarnetEntity getCarnet() {
+		return carnet;
+	}
+
+	public void setCarnet(CarnetEntity carnet) {
+		this.carnet = ObjectHelper.getObjectHelper().getDefaultValue(carnet, new CarnetEntity());
 	}
 	
 	

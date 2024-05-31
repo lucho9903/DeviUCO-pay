@@ -2,8 +2,10 @@ package co.edu.uco.deviucopay.business.facade.impl.cuenta;
 
 import co.edu.uco.deviucopay.business.assembler.dto.impl.CuentaAssemblerDTO;
 import co.edu.uco.deviucopay.business.facade.FacadeWithoutReturn;
+import co.edu.uco.deviucopay.business.usecase.impl.cuenta.RegistrarCuenta;
 import co.edu.uco.deviucopay.crosscutting.exceptions.DeviUcopayException;
 import co.edu.uco.deviucopay.crosscutting.exceptions.customs.BusinessDeviUcopayException;
+import co.edu.uco.deviucopay.data.dao.factory.DAOFactory;
 import co.edu.uco.deviucopay.dto.CuentaDTO;
 
 public class RegistrarCuentaFacade implements FacadeWithoutReturn<CuentaDTO>{
