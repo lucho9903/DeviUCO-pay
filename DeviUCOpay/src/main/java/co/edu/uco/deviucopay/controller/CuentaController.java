@@ -1,11 +1,19 @@
 package co.edu.uco.deviucopay.controller;
 
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import co.edu.uco.deviucopay.business.facade.impl.cuenta.ConsultarCuentaFacade;
 import co.edu.uco.deviucopay.business.facade.impl.cuenta.RegistrarCuentaFacade;
+import co.edu.uco.deviucopay.controller.response.CuentaResponse;
 import co.edu.uco.deviucopay.crosscutting.exceptions.DeviUcopayException;
 import co.edu.uco.deviucopay.dto.CuentaDTO;
 
@@ -21,7 +29,7 @@ public class CuentaController {
 	public ResponseEntity<CuentaResponse> consultar() {
 
 		var httpStatusCode = HttpStatus.ACCEPTED;
-		var ciudadResponse = new CuenrtaResponse();
+		var ciudadResponse = new CuentaResponse();
 
 		try {
 			var ciudadDto = CuentaDTO.build();
@@ -140,7 +148,7 @@ public class CuentaController {
 			excepcion.printStackTrace();
 		}
 
-		return new ResponseEntity<CiudadResponse>(cuentaResponse, httpStatusCode);
+		return new ResponseEntity<CuentaResponse>(cuentaResponse, httpStatusCode);
 
 	}
 
